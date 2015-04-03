@@ -1,0 +1,120 @@
+<div class="page page-table" ng-controller="PatientsCtrl">
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="nav nav-boxed nav-justified">
+                <li>
+                    <a ng-href="#/patient/new"><i class="color-success fa fa-user"></i> New Patient</a>
+                </li>
+                <li class="open">
+                    <a ng-href="#/patient/list"><i class="color-warning fa fa-users"></i> List Patients</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <section class="panel panel-default table-dynamic">
+        <div class="panel-heading">
+            <strong><span class="glyphicon glyphicon-th"></span> Patients</strong>
+        </div>
+        <div class="panel-body">
+            <div class="row text-small">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <select class="form-control" name="treatment" ng-change="undertreatment()" ng-model="treatment">
+                            <option value=""></option>
+                            <option value="true">Under treatment</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-offset-4 col-sm-4">
+                    <form class="input-group form-search" name="form" role="search" ng-submit="search()">
+                        <span class="input-group-addon icon"><i class="fa fa-search"></i></span>
+                        <input class="input-sm form-control" ng-enter="search()" ng-model="q" placeholder="Search" type="text"/>
+                        <span class="input-group-btn"><button class="btn btn-sm btn-default" ng-click="search()" type="button">Go!</button></span>
+                    </form>
+                </div>
+            </div>
+            <div class="table-responsive table-dynamic">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>
+                                <div class="th" ng-class="{'sort-active': sort === 'id', 'sort-asc': order === 'asc', 'sort-desc': order === 'desc'}" ng-click="sortBy('id')">
+                                    ID
+                                    <span class="sort-action pull-right"><i class="fa fa-lg fa-caret-down"></i><i class="fa fa-lg fa-caret-up"></i></span>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th" ng-class="{'sort-active': sort === 'first_name', 'sort-asc': order === 'asc', 'sort-desc': order === 'desc'}" ng-click="sortBy('first_name')">
+                                    Name
+                                    <span class="sort-action pull-right"><i class="fa fa-lg fa-caret-down"></i><i class="fa fa-lg fa-caret-up"></i></span>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th" ng-class="{'sort-active': sort === 'last_name', 'sort-asc': order === 'asc', 'sort-desc': order === 'desc'}" ng-click="sortBy('last_name')">
+                                    Surname
+                                    <span class="sort-action pull-right"><i class="fa fa-lg fa-caret-down"></i><i class="fa fa-lg fa-caret-up"></i></span>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th" ng-class="{'sort-active': sort === 'created_at', 'sort-asc': order === 'asc', 'sort-desc': order === 'desc'}" ng-click="sortBy('created_at')">
+                                    Date added
+                                    <span class="sort-action pull-right"><i class="fa fa-lg fa-caret-down"></i><i class="fa fa-lg fa-caret-up"></i></span>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th" ng-class="{'sort-active': sort === 'treatment', 'sort-asc': order === 'asc', 'sort-desc': order === 'desc'}" ng-click="sortBy('treatment')">
+                                    Under treatment
+                                    <span class="sort-action pull-right"><i class="fa fa-lg fa-caret-down"></i><i class="fa fa-lg fa-caret-up"></i></span>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th text-center">
+                                    Action
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="patient in results.data">
+                            <td ng-bind="patient.id">
+                            </td>
+                            <td ng-bind="patient.first_name">
+                            </td>
+                            <td ng-bind="patient.last_name">
+                            </td>
+                            <td ng-bind="patient.created_at | mydatetime">
+                            </td>
+                            <td>{{ (patient.treatment > 0) ? "True" : "False"}}
+                            </td>
+                            <td class="text-center">
+                                <a class="btn-icon btn-icon-sm bg-info" ng-href="#/patient/{{ patient.id }}"><i class="fa fa-pencil"></i></a>
+                                <a class="btn-icon btn-icon-sm bg-danger" href="javascript:;" ng-click="delete(patient.id)"><i class="fa fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <footer class="table-footer">
+                <div class="row">
+                    <div class="col-md-6 page-num-info">
+                        <p class="m-t inline">
+                            {{ results.from }}-{{ results.to }} of {{ results.total }} items
+                            <select ng-change="changeLimit(results.per_page)" ng-model="results.per_page" ng-options="obj for obj in perpage">
+                            </select>
+                            per page
+                        </p>
+                    </div>
+                    <div class="col-md-6 text-right pagination-container">
+                        <pagination boundary-links="true" class="pagination-sm" items-per-page="results.per_page" ng-change="goTo(results.current_page)" ng-model="results.current_page" rotate="false" total-items="results.total">
+                        </pagination>
+                    </div>
+                </div>
+                <div class="divider">
+                </div>
+                <p class="text-right">
+                    <button class="btn btn-success" go-click="/patient/new" type="button">New patient</button>
+                </p>
+            </footer>
+        </div>
+    </section>
+</div>

@@ -1,0 +1,41 @@
+<div class="modal-header">
+    <button aria-hidden="true" class="close" data-dismiss="modal" ng-click="dismiss()" type="button">×</button>
+    <h4 class="modal-title">
+        Add new bond
+    </h4>
+</div>
+<div class="modal-body">
+    <form class="form-horizontal" name="form" ng-submit="submit()" novalidate role="form">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" for="name">Type</label>
+                    <div class="col-sm-9">
+                        <select class="form-control" id="bond" name="bond" ng-model="bond" ng-options="obj as obj.name for obj in bonds" required>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="col-sm-6 control-label" for="session">Sessions</label>
+                    <div class="col-sm-6">
+                        <input class="form-control input-sm" disabled="disabled" min="1" name="session" ng-value="bond.session"/>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="col-sm-6 control-label" for="day">Days</label>
+                    <div class="col-sm-6">
+                        <input class="form-control input-sm" disabled="disabled" min="1" name="day" ng-value="bond.timetouse"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-default" ng-click="dismiss()">Dismiss</button>
+    <button class="btn btn-primary" ng-click="submit()" ng-disabled="form.$invalid" type="submit">Add new bond</button>
+</div>

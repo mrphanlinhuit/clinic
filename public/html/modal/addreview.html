@@ -1,0 +1,21 @@
+<div class="modal-header">
+    <button aria-hidden="true" class="close" data-dismiss="modal" ng-click="dismiss()" type="button">×</button>
+    <h4 class="modal-title">
+        {{ review.diagnostic_id ? "Edit": "Add" }} Review
+    </h4>
+</div>
+<div class="modal-body">
+    <form class="form-horizontal" name="form" ng-submit="submit()" novalidate role="form">
+        <div class="form-group" ng-class="{'has-error': form.$dirty && form.description.$invalid}">
+            <label class="col-sm-12" for="description">Review</label>
+            <div class="col-sm-12">
+                <textarea class="form-control" name="description" ng-model="review.description" required rows="4">
+                </textarea>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-default" ng-click="dismiss()">Dismiss</button>
+    <button class="btn btn-primary" ng-click="submit()" ng-disabled="form.$invalid" type="submit">Save</button>
+</div>

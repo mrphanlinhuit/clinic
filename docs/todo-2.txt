@@ -1,0 +1,201 @@
+
+*************
+* Dashboard *
+*************
+
+	- Next patient list should show from the current time minus one hour forward and it should be ordered by date.
+	OK - Remove phone date and calendar icons
+	OK - Dates should be always dd/mm/yyyy
+	(!) - Screen should refresh after adding a new appointment so it appear in the "next patient list"	
+	(!) - The phone date scheduling is difficult to use. There should be some way to view the calendar so the employee who answer the phone can see which rooms and employees are free.	
+					
+	
+
+********************
+* Patients section *
+********************
+
+	* Patient *
+	-----------
+	(!) - Tags are not suggested. An internal tag database should be created with the tags entered by the users.
+		BSS has done something (?) but it is not working (tested with Chrome to add a tag in one patient and expected to see it suggested in another patient)
+	- When dragging a file to the photo area the attachment progress bar is updated.
+		BSS has done something (?) but it is not working (tested with Chrome to change patient picture and the attachment progress bar is still updated)
+
+	* Diagnostic *
+	--------------	
+	(!) - Tags are not suggested 
+			BSS has done something (?) but it is not working (tested with Chrome to add a tag in one diagnostic and expected to see it suggested in another diagnostic)
+	- When a new diagnostic is created it don't show that there are 0 sessions prescribed (nothing appears in the sessions prescribed column)	
+
+	
+	* Appointments *
+	----------------
+	(!) - Schedule new session
+		(!) - Scheduling sessions should allow selecting the time, not only the date with a length given by the treatment length.
+			BSS has done something (?) but I cannot find what.
+		(!) - Scheduling sessions should allow selecting the employee
+			BSS has done something (?) but I cannot find what.
+		(!) - There should be some way to view the calendar so the employee can see which rooms and employees are free.	
+	(!) - "Sessions scheduled": When we schedule a new session the "Sessions scheduled" counter is not updated
+	(!) - The prescription box should also show the associated diagnostic (next to the date).
+	(!) - We cannot schedule more sessions than -> Prescribed + missed - scheduled. A modal message can be shown.
+	- We should add a button to delete a scheduled session.
+
+	* Bonds *
+	---------
+	(!) - We should be able to associate a "Received session" (to be paid) with the bond
+	(!) - We should be able to disassociate an associated session to the bond. (the session will be then unpaid)
+	
+	* Cash * 
+	--------
+	(!) - Please, review the mockups
+			- Screen should show received sessions to be paid and not only bonds
+			- A bond cannot be "charged to bond"
+			- Incorrect field: Charged date; The date when the item is payed
+			- Incorrect field: Charged by: The user who make the charge or the devolution
+			- Incorrect field: Type:
+					- None: the item has still not been charged					
+					- Money: The item is charged by money
+					- Card: The item is charged by card							
+			- If the item has not been paid, the "charged date", "charged by", "type" should be None, or empty.
+			- We can make only devolution of charged items.
+			- Devolutions are of the same amount and type of the line you are making the devolution (selected line).
+			- Devolution of Sessions paid with bond should not be allowed
+			- Devolution of devolution should not be allowed
+			- Devolution of invoiced items should not be allowed
+			- Devolution of invoiced items with an amendment bill should be allowed
+			
+
+	* Invoice * 
+	-----------
+		- "Invoice selected":
+			- When creating an invoice, the following fields should be auto completed but modifiable in the modal box :
+				- Address: the address of the patient
+				- Fiscal code: the National Id of the patient
+				- Amount (not modifiable): the price of the item to be invoiced.
+			- An item can only has one invoice.
+			- The invoice number should be auto generated like FA-0000001, FA-0000002, ... This number is unique and consecutive without gaps.
+				- If we delete invoice FA-000002, and create a new one, the number assigned must be FA-000002
+			- The amendment bill number should be auto generated like AB-0000001, AB-0000002, ... This number is unique and consecutive without gaps.
+			- (!) When a new invoice is created it should not add a new movement to the cash screen. They are different things.
+			- When selecting an invoice it should allow printing/generating pdf of the invoice
+				- Amounts are shown WITH taxes. Price without taxes can be calculated with amount and tax rate (tax rate is given in administration section)
+				- The printed invoice must shown:
+					- Clinic data ( Name,  Address, Zip Code, Locality Province,  e-mail,  Phone, Logo, VAT ID)
+					- Items price with and without taxes and total with and without taxes
+					- Invoice data (Name, Address, Fiscal code)
+
+			
+	* Timeline * 
+	-----------			
+		- More details should be given in timeline
+		
+
+********************
+* Calendar section *
+********************
+	(!) - When scheduling sessions from Calendar view, we must be able to select the time not only the date with a length given by the treatment length. Now they are always "all the day"
+		BSS now allows selecting time but items appear in calendar always as all day.
+	(!)	- Add session to schedule:
+			1. Write patient name:
+				1.1 If patient name exist, populate diagnostics
+				1.2 If patient name don't exist, patient will be created with phone
+			2. Select diagnostic from available or write new diagnostic.
+				2.1 If diagnostic was manually written, only doctor treatments are available and a review field is available that will be associated to the diagnostic.
+					2.1.1 Select doctor treatment, doctor employee and doctor room and date.
+				2.2. If diagnostic was selected, populate "Treatment" with the treatments that have been prescribed but not scheduled specifying the number of sessions to be scheduled (prescribed sessions - scheduled sessions + missed sessions)
+					2.2.1 Select treatment, employee room and date
+
+			
+	- Calendar should show clinic open and closing hours (I mean showing the closing hours in another color in the week/day view)
+
+
+****************
+* Cash section *
+****************
+
+	* Movements *
+	------------
+	- This is the same screen than patient-cash with the following differences:
+		- By default show all the movements. If something is selected in the calendar filter then apply the filter.
+		- Money this day, card this day and total this day should be calculated. It should be calculated according to the date selected in the filter or by default, the current day.
+		- "Add spending button":  When pushing "Add spending"  the modal of devolution is shown. If you select a movement the correct modal is shown.
+			- This modal should only allow selecting between Card/money
+		(OK) - No "charge" button
+
+	* Statistics *
+	------------	
+	- Not working
+		BSS has done something but doesn't fit mockups
+
+	
+	
+**********************
+* Accounting section *
+**********************
+
+	* Client invoices *
+	-------------------
+	- Client invoices not working.
+		- This is the same screen than Patient invoices without the buttons to remove last one.
+	
+	* New provider *
+	----------------
+		- When adding a new invoice screen should update
+		- When pressing view icon, file should be downloaded
+			
+	* Provider invoices *
+	---------------------
+		- When pressing view, the file should be downloaded.
+		
+	* Statistics *
+	--------------
+		- Not working
+			BSS has done something but doesn't fit mockups
+
+	* Download *
+	--------------
+		- Not working
+	
+	
+	
+********************
+* Messages section *
+********************
+	- Screen don't update after message read
+	- Sent messages list don't show the "To:" field
+	
+	
+**************************
+* Administration section *
+**************************
+	
+	* News *
+	--------
+		- Allow adding an optional image to the article
+			BSS has added an HTML editor but it doesn't allow changing the image of the latest news in the dashboard.		
+		- Allow enabling / disabling news
+		- If no enabled news they should not appear in dashboard.
+
+	* Pathologies *
+	---------------
+		- Add prescription recommendation field to pathologies (textarea)
+		
+	* Clinic data*
+	--------------	
+	- Changing clinic name changes user name because user_id admin is related with clinic_data
+		
+	 * Treatments *
+	---------------	
+	 (!) - Treatments duration is in minutes. It must be used when scheduling
+		BSS has done something but sessions appear always as "all day".
+	 
+	 	
+	
+********************
+* Others		   *
+********************
+
+	- Access control
+	- Keep responsive

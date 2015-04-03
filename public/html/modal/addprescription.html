@@ -1,0 +1,39 @@
+<div class="modal-header">
+    <button aria-hidden="true" class="close" data-dismiss="modal" ng-click="dismiss()" type="button">×</button>
+    <h4 class="modal-title">
+        {{ prescription.diagnostic_id ? "Edit": "Add" }} Prescription
+    </h4>
+</div>
+<div class="modal-body">
+    <form class="form-horizontal" name="form" novalidate role="form">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group" ng-class="{'has-error': form.$dirty && form.treatment_id.$invalid}">
+                    <label class="col-sm-3 control-label" for="treatment_id">Treatment</label>
+                    <div class="col-sm-9">
+                        <select class="form-control" id="treatment_id" name="treatment_id" ng-model="prescription.treatment_id" ng-options="obj.id as obj.name for obj in treatments" required>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{'has-error': form.$dirty && form.sessions.$invalid}">
+                    <label class="col-sm-3 control-label" for="sessions">Sessions</label>
+                    <div class="col-sm-9">
+                        <input class="form-control" fixnumeric name="sessions" ng-min="1" ng-model="prescription.sessions" placeholder="Sessions..." required type="text"/>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <textarea class="form-control" id="notes" name="notes" ng-model="prescription.notes" placeholder="Note..." rows="4">
+                        </textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-default" ng-click="dismiss()">Dismiss</button>
+    <button class="btn btn-primary" ng-click="submit()" ng-disabled="form.$invalid" type="submit">Save</button>
+</div>

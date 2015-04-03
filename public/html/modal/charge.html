@@ -1,0 +1,19 @@
+<div class="modal-header">
+    <button aria-hidden="true" class="close" data-dismiss="modal" ng-click="dismiss()" type="button">×</button>
+    <h4 class="modal-title">
+        Charge
+    </h4>
+</div>
+<div class="modal-body">
+    <form action="" class="form-inline" method="POST" role="form">
+        <div class="form-group col-sm-6">
+            <select class="form-control" name="payment_type" ng-model="charge.payment_type" required>
+                <option value=""></option>
+                <option value="money">Money</option>
+                <option value="card">Card</option>
+                <option value="bond">Bond</option>
+            </select>
+        </div>
+        <button class="btn btn-primary" type="submit">Charge</button>
+    </form>
+</div>

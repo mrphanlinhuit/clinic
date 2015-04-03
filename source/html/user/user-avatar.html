@@ -1,0 +1,40 @@
+<div class="modal-header">
+    <button aria-hidden="true" class="close" data-dismiss="modal" ng-click="dismiss()" type="button"> × </button>
+    <h4 class="modal-title">
+        Edit Profile Picture
+    </h4>
+</div>
+<div class="modal-body">
+    <form class="form-horizontal" name="form" ng-file-drop ng-submit="save(user)" novalidate>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="thumbnail">
+                    <img class="img-on-load" ng-src="{{user.meta.profile_img_url | getAvatar}}"/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div ng-show="showprogress">
+                    <progressbar class="progressbar-sm progress-striped active" ng-show="progress > 0" value="progress">
+                        <span>{{progress}}%</span>
+                    </progressbar>
+                </div>
+                <input accept="image/*" class="form-control" id="file" name="file" ng-file-select type="file" upload-button upload-button-class="btn btn-default" upload-button-text="Upload Picture"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div ng-show="uploader.isHTML5">
+                    <div class="drop-box" ng-file-over>
+                        Drag and drop files here
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-default" ng-click="dismiss()" type="button">Cancel</button>
+    <button class="btn btn-primary" ng-click="save(user)" type="button">Save</button>
+</div>

@@ -1,0 +1,32 @@
+<div class="modal-header">
+    <button aria-hidden="true" class="close" data-dismiss="modal" ng-click="dismiss()" type="button">×</button>
+    <h4 class="modal-title">
+        Devolution
+    </h4>
+</div>
+<div class="modal-body">
+    <div ng-show="!movements">
+        Please choose a movements for devolution
+    </div>
+    <form class="form-horizontal" name="form" ng-show="movements" ng-submit="submit()" novalidate role="form">
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="amount">Amount</label>
+            <div class="col-sm-4">
+                <input class="form-control" name="amount" disabled="disabled" ng-model="devolution.amount"  type="text"/>
+            </div>
+            <label class="col-sm-2 control-label" for="payment_type">Type</label>
+            <div class="col-sm-4" ng-class="{'has-error': form.$dirty && form.payment_type.$invalid}">
+                <select class="col-sm-4 form-control" name="payment_type" ng-model="devolution.payment_type" required>
+                    <option value=""></option>
+                    <option value="money">Money</option>
+                    <option value="card">Card</option>
+                    <option value="bond">Bond</option>
+                </select>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-default" ng-click="dismiss()">Dismiss</button>
+    <button class="btn btn-primary" ng-click="submit()" ng-disabled="form.$invalid" type="submit">Save</button>
+</div>

@@ -1,0 +1,142 @@
+<div class="page page-profile">
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="nav nav-boxed nav-justified">
+                <li>
+                    <a ng-href="#/user/list"><i class="color-success fa fa-users"></i> User</a>
+                </li>
+                <li>
+                    <a ng-href="#/administration/treatments"><i class="color-warning fa fa-hand-o-up"></i> Treatments</a>
+                </li>
+                <li>
+                    <a ng-href="#/administration/bonds"><i class="color-danger fa fa-ticket"></i> Bonds</a>
+                </li>
+                <li>
+                    <a ng-href="#/administration/rooms"><i class="color-info fa fa-table"></i> Rooms</a>
+                </li>
+                <li>
+                    <a ng-href="#/administration/pathologies"><i class="color-gray fa fa-frown-o"></i> Pathologies</a>
+                </li>
+                <li>
+                    <a ng-href="#/administration/referers"><i class="color-info-alt fa fa-refresh"></i> Referers</a>
+                </li>
+                <li class="open">
+                    <a ng-href="#/administration/clinic"><i class="color-primary fa fa-medkit"></i> Clinic data</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <section class="panel panel-default" ng-controller="UserCtrl">
+        <div class="panel-heading">
+            <strong><span class="fa fa-medkit"></span> Clinic Data</strong>
+        </div>
+        <div class="panel-body">
+            <form class="form-horizontal" name="form" ng-submit="save()" novalidate>
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="">Username</label>
+                            <div class="col-sm-10" ng-class="{'has-error': form.$dirty && form.first_name.$invalid}">
+                                <input class="form-control input-sm" id="first_name" name="first_name" ng-model="user.meta.first_name" placeholder="" required type="text"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="">VAT ID</label>
+                            <div class="col-sm-4">
+                                <input class="form-control input-sm" id="vat_id" name="vat_id" ng-model="user.clinic.vat_id" placeholder="" type="text"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="address1">Address</label>
+                            <div class="col-sm-10">
+                                <input class="form-control input-sm" name="address1" ng-model="user.meta.address1" type="text"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="postal"> Zip Code</label>
+                            <div class="col-sm-4">
+                                <input class="form-control" id="postal" name="postal" ng-model="user.meta.postal" placeholder="" type="text"/>
+                            </div>
+                            <label class="col-sm-2 control-label" for="province">Province</label>
+                            <div class="col-sm-4">
+                                <input class="form-control input-sm" ng-model="user.meta.province" type="text"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="postal"> Locality</label>
+                            <div class="col-sm-4">
+                                <select class="form-control" id="locality" name="locality" ng-model="user.meta.postal" ng-options="obj.key as obj.name for obj in postals" type="text">
+                                </select>
+                            </div>
+                            <label class="col-sm-2 control-label" for="country"> Country</label>
+                            <div class="col-sm-4">
+                                <select class="form-control" id="country" name="country" ng-model="user.meta.country" ng-options="obj.key as obj.name for obj in countries" type="text">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="phone"> Phone</label>
+                            <div class="col-sm-4">
+                                <input class="form-control input-sm" name="phone" ng-model="user.meta.phone" type="text"/>
+                            </div>
+                            <label class="col-sm-2 control-label" for="email"> Email</label>
+                            <div class="col-sm-4">
+                                <input class="form-control input-sm" name="email" ng-model="user.credential.email" type="text"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="openhour1"> Open Hours 1</label>
+                            <div class="col-sm-4">
+                                <input class="form-control" name="openhour1" ng-model="user.clinic.openhour1" placeholder="HH:mm:ss" type="time"/>
+                            </div>
+                            <label class="col-sm-2 control-label" for="openhour2"> Open Hours 2</label>
+                            <div class="col-sm-4">
+                                <input class="form-control" name="openhour2" ng-model="user.clinic.openhour2" placeholder="HH:mm:ss" type="time"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="closehour1"> Close Hours 1</label>
+                            <div class="col-sm-4">
+                                <input class="form-control" name="closehour1" ng-model="user.clinic.closehour1" placeholder="HH:mm:ss" type="time"/>
+                            </div>
+                            <label class="col-sm-2 control-label" for="closehour2"> Close Hours 2</label>
+                            <div class="col-sm-4">
+                                <input class="form-control" name="closehour2" ng-model="user.clinic.closehour2" placeholder="HH:mm:ss" type="time"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="avatar" ng-file-drop ng-file-over ng-show="uploader.isHTML5">
+                            <a class="remove btn-icon btn-icon-sm btn-danger" href="javascript:;" ng-click="removeAvatar()"><i class="fa fa-times"></i></a>
+                            <img class="img-on-load img-responsive" ng-click="avatarModal()" ng-src="{{user.meta.profile_img_url | getAvatar}}"/>
+                            <div class="text-center">
+                                Drag and drop files here
+                                <div ng-show="showprogress">
+                                    <progressbar class="progressbar-sm progress-striped active" ng-show="progress > 0" value="progress">
+                                        <span>{{progress}}%</span>
+                                    </progressbar>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="col-sm-1 control-label" for="">Note</label>
+                            <div class="col-sm-11">
+                                <textarea class="form-control" id="notes" name="notes" ng-model="user.clinic.notes" rows="4">
+                                </textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-right">
+                    <button class="btn" ng-click="dismiss()" type="button">Revert</button>
+                    <button class="btn btn-success" type="submit">Save changes</button>
+                </p>
+                <p ng-hide="user.register">
+                    Created {{user.created_at | mydatetime}} by {{user.created_by_name}}. Last modified  {{user.updated_at | mydatetime}} by {{user.updated_by_name}}.
+                </p>
+            </form>
+        </div>
+    </section>
+</div>

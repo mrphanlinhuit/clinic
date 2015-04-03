@@ -1,0 +1,442 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="1569" measuredH="705" mockupW="1499" mockupH="595">
+  <controls>
+    <control controlID="3" controlTypeID="com.balsamiq.mockups::Icon" x="231" y="120" w="-1" h="-1" measuredW="24" measuredH="24" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>ListIcon%7Csmall</icon>
+      </controlProperties>
+    </control>
+    <control controlID="4" controlTypeID="com.balsamiq.mockups::Canvas" x="220" y="110" w="47" h="43" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="-1"/>
+    <control controlID="5" controlTypeID="com.balsamiq.mockups::Icon" x="272" y="120" w="-1" h="-1" measuredW="24" measuredH="24" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>ContactIcon%7Csmall</icon>
+      </controlProperties>
+    </control>
+    <control controlID="7" controlTypeID="com.balsamiq.mockups::Canvas" x="267" y="111" w="247" h="42" measuredW="100" measuredH="70" zOrder="2" locked="false" isInGroup="-1"/>
+    <control controlID="8" controlTypeID="com.balsamiq.mockups::Canvas" x="514" y="111" w="452" h="42" measuredW="100" measuredH="70" zOrder="4" locked="false" isInGroup="-1"/>
+    <control controlID="9" controlTypeID="com.balsamiq.mockups::Label" x="383" y="122" w="-1" h="-1" measuredW="53" measuredH="21" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Lisa%20Doe</text>
+      </controlProperties>
+    </control>
+    <control controlID="10" controlTypeID="com.balsamiq.mockups::Canvas" x="966" y="111" w="50" h="41" measuredW="100" measuredH="70" zOrder="6" locked="false" isInGroup="-1"/>
+    <control controlID="11" controlTypeID="com.balsamiq.mockups::Icon" x="979" y="120" w="-1" h="-1" measuredW="24" measuredH="24" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>BaloonIcon%7Csmall</icon>
+      </controlProperties>
+    </control>
+    <control controlID="12" controlTypeID="com.balsamiq.mockups::Label" x="689" y="122" w="-1" h="-1" measuredW="102" measuredH="21" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>dd/mm/yy%20hh%3Amm</text>
+      </controlProperties>
+    </control>
+    <control controlID="166" controlTypeID="com.balsamiq.mockups::StickyNote" x="1087" y="144" w="482" h="447" measuredW="109" measuredH="123" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>left</align>
+        <text>This%20is%20the%20screen%20to%20make%20a%20new%20appointment%2C%20it%20shows%20the%20availability%20based%20on%20the%20room/employee%20selection%0A%20%0AThe%20duration%20of%20each%20treatment%20and%20the%20opening%20times%20are%20configured%20by%20the%20administrator.%0A%20%0AWhen%20a%20date%20is%20selected%20the%20view%20of%20the%20day%20is%20shown%20to%20select%20an%20hour%20or%20go%20back.%0A%20%0AWhen%20the%20dropdown%20changes%20the%20availabilty%20is%20dynamically%20updated.%0A%20%0AThe%20availability%20is%20calculated%20based%20on%20room/employee%20availability%20during%20day.%20%20Currently%20there%20are%20no%20restrictions%20wether%20a%20room%20can%20be%20used%20by%20two%20patients%20or%20a%20employee%20can%20attends%20two%20patients.%0A%20%0ARed%3A%20No%20availability%0AOrange%3A%20Availability%20under%2050%25%0AGreen%3A%20Availability%20over%2050%25%0A%20%0A1.-Filter%20availability</text>
+      </controlProperties>
+    </control>
+    <control controlID="252" controlTypeID="com.balsamiq.mockups::VRule" x="383" y="285" w="-1" h="420" measuredW="10" measuredH="100" zOrder="10" locked="false" isInGroup="-1"/>
+    <control controlID="303" controlTypeID="com.balsamiq.mockups::ButtonBar" x="607" y="287" w="-1" h="-1" measuredW="165" measuredH="27" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <hrefs>schedule-session-day%26bm%3Bschedule-session-day.bmml%26bm%3Bschedule-session-day.bmml%26bm%3Bschedule-session-day.bmml%2Cschedule-session-week%26bm%3Bschedule-session-week.bmml%26bm%3Bschedule-session-week.bmml%26bm%3Bschedule-session-week.bmml%2Cschedule-session-month%26bm%3Bschedule-session-month.bmml%26bm%3Bschedule-session-month.bmml%26bm%3Bschedule-session-month.bmml</hrefs>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22537%2C177%2C584%2C204%22%20href%3D%22schedule-session-day.bmml%22%20alt%3D%22schedule-session-day%22%20id%3D%22303%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22584%2C177%2C642%2C204%22%20href%3D%22schedule-session-week.bmml%22%20alt%3D%22schedule-session-week%22%20id%3D%22303%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22642%2C177%2C702%2C204%22%20href%3D%22schedule-session-month.bmml%22%20alt%3D%22schedule-session-month%22%20id%3D%22303%22/%3E%0A</map>
+        <selectedIndex>2</selectedIndex>
+        <text>Day%2C%20Week%2C%20Month</text>
+      </controlProperties>
+    </control>
+    <control controlID="304" controlTypeID="com.balsamiq.mockups::Image" x="405" y="325" w="-1" h="-1" measuredW="598" measuredH="380" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <src>./assets/calendar.png</src>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="369" controlTypeID="com.balsamiq.mockups::RoundButton" x="830" y="351" w="86" h="71" measuredW="32" measuredH="32" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0.25</backgroundAlpha>
+        <borderColor>13576743</borderColor>
+        <color>13576743</color>
+        <shape>roundRect</shape>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="370" controlTypeID="com.balsamiq.mockups::RoundButton" x="830" y="422" w="86" h="71" measuredW="32" measuredH="32" zOrder="14" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0.25</backgroundAlpha>
+        <borderColor>13576743</borderColor>
+        <color>13576743</color>
+        <shape>roundRect</shape>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="371" controlTypeID="com.balsamiq.mockups::RoundButton" x="830" y="493" w="86" h="71" measuredW="32" measuredH="32" zOrder="15" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0.25</backgroundAlpha>
+        <borderColor>13576743</borderColor>
+        <color>13576743</color>
+        <shape>roundRect</shape>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="372" controlTypeID="com.balsamiq.mockups::RoundButton" x="830" y="564" w="86" h="71" measuredW="32" measuredH="32" zOrder="16" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0.25</backgroundAlpha>
+        <borderColor>13576743</borderColor>
+        <color>13576743</color>
+        <shape>roundRect</shape>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="373" controlTypeID="com.balsamiq.mockups::RoundButton" x="830" y="634" w="86" h="71" measuredW="32" measuredH="32" zOrder="17" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0.25</backgroundAlpha>
+        <borderColor>13576743</borderColor>
+        <color>13576743</color>
+        <shape>roundRect</shape>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="374" controlTypeID="com.balsamiq.mockups::RoundButton" x="916" y="351" w="86" h="71" measuredW="32" measuredH="32" zOrder="18" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0.25</backgroundAlpha>
+        <borderColor>13576743</borderColor>
+        <color>13576743</color>
+        <shape>roundRect</shape>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="375" controlTypeID="com.balsamiq.mockups::RoundButton" x="916" y="422" w="86" h="71" measuredW="32" measuredH="32" zOrder="19" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0.25</backgroundAlpha>
+        <borderColor>13576743</borderColor>
+        <color>13576743</color>
+        <shape>roundRect</shape>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="376" controlTypeID="com.balsamiq.mockups::RoundButton" x="916" y="493" w="86" h="71" measuredW="32" measuredH="32" zOrder="20" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0.25</backgroundAlpha>
+        <borderColor>13576743</borderColor>
+        <color>13576743</color>
+        <shape>roundRect</shape>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="377" controlTypeID="com.balsamiq.mockups::RoundButton" x="916" y="564" w="86" h="71" measuredW="32" measuredH="32" zOrder="21" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0.25</backgroundAlpha>
+        <borderColor>13576743</borderColor>
+        <color>13576743</color>
+        <shape>roundRect</shape>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="378" controlTypeID="com.balsamiq.mockups::RoundButton" x="916" y="634" w="86" h="71" measuredW="32" measuredH="32" zOrder="22" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0.25</backgroundAlpha>
+        <borderColor>13576743</borderColor>
+        <color>13576743</color>
+        <shape>roundRect</shape>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="380" controlTypeID="com.balsamiq.mockups::RoundButton" x="664" y="422" w="86" h="71" measuredW="32" measuredH="32" zOrder="23" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0.25</backgroundAlpha>
+        <borderColor>16750848</borderColor>
+        <color>16750848</color>
+        <shape>roundRect</shape>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="381" controlTypeID="com.balsamiq.mockups::RoundButton" x="664" y="493" w="86" h="71" measuredW="32" measuredH="32" zOrder="24" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0.25</backgroundAlpha>
+        <borderColor>16750848</borderColor>
+        <color>16750848</color>
+        <shape>roundRect</shape>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="382" controlTypeID="com.balsamiq.mockups::RoundButton" x="664" y="564" w="86" h="71" measuredW="32" measuredH="32" zOrder="25" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0.25</backgroundAlpha>
+        <borderColor>16750848</borderColor>
+        <color>16750848</color>
+        <shape>roundRect</shape>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="383" controlTypeID="com.balsamiq.mockups::RoundButton" x="664" y="634" w="86" h="71" measuredW="32" measuredH="32" zOrder="26" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0.25</backgroundAlpha>
+        <borderColor>40463</borderColor>
+        <color>40463</color>
+        <shape>roundRect</shape>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="384" controlTypeID="com.balsamiq.mockups::RoundButton" x="750" y="422" w="82" h="71" measuredW="32" measuredH="32" zOrder="27" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0.25</backgroundAlpha>
+        <borderColor>16750848</borderColor>
+        <color>16750848</color>
+        <shape>roundRect</shape>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="385" controlTypeID="com.balsamiq.mockups::RoundButton" x="750" y="493" w="82" h="71" measuredW="32" measuredH="32" zOrder="28" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0.25</backgroundAlpha>
+        <borderColor>13576743</borderColor>
+        <color>13576743</color>
+        <shape>roundRect</shape>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="386" controlTypeID="com.balsamiq.mockups::RoundButton" x="750" y="564" w="82" h="71" measuredW="32" measuredH="32" zOrder="29" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0.25</backgroundAlpha>
+        <borderColor>16750848</borderColor>
+        <color>16750848</color>
+        <shape>roundRect</shape>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="387" controlTypeID="com.balsamiq.mockups::RoundButton" x="750" y="634" w="82" h="71" measuredW="32" measuredH="32" zOrder="30" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0.25</backgroundAlpha>
+        <borderColor>40463</borderColor>
+        <color>40463</color>
+        <shape>roundRect</shape>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="388" controlTypeID="com.balsamiq.mockups::RoundButton" x="492" y="422" w="86" h="71" measuredW="32" measuredH="32" zOrder="31" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0.25</backgroundAlpha>
+        <borderColor>13576743</borderColor>
+        <color>13576743</color>
+        <shape>roundRect</shape>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="389" controlTypeID="com.balsamiq.mockups::RoundButton" x="492" y="493" w="86" h="71" measuredW="32" measuredH="32" zOrder="32" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0.25</backgroundAlpha>
+        <borderColor>16750848</borderColor>
+        <color>16750848</color>
+        <shape>roundRect</shape>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="390" controlTypeID="com.balsamiq.mockups::RoundButton" x="492" y="564" w="86" h="71" measuredW="32" measuredH="32" zOrder="33" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0.25</backgroundAlpha>
+        <borderColor>13576743</borderColor>
+        <color>13576743</color>
+        <shape>roundRect</shape>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="391" controlTypeID="com.balsamiq.mockups::RoundButton" x="492" y="634" w="86" h="71" measuredW="32" measuredH="32" zOrder="34" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0.25</backgroundAlpha>
+        <borderColor>40463</borderColor>
+        <color>40463</color>
+        <shape>roundRect</shape>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="392" controlTypeID="com.balsamiq.mockups::RoundButton" x="578" y="422" w="86" h="71" measuredW="32" measuredH="32" zOrder="35" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0.25</backgroundAlpha>
+        <borderColor>13576743</borderColor>
+        <color>13576743</color>
+        <shape>roundRect</shape>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="393" controlTypeID="com.balsamiq.mockups::RoundButton" x="578" y="493" w="86" h="71" measuredW="32" measuredH="32" zOrder="36" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0.25</backgroundAlpha>
+        <borderColor>16750848</borderColor>
+        <color>16750848</color>
+        <shape>roundRect</shape>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="394" controlTypeID="com.balsamiq.mockups::RoundButton" x="578" y="564" w="86" h="71" measuredW="32" measuredH="32" zOrder="37" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0.25</backgroundAlpha>
+        <borderColor>16750848</borderColor>
+        <color>16750848</color>
+        <shape>roundRect</shape>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="395" controlTypeID="com.balsamiq.mockups::RoundButton" x="578" y="634" w="86" h="71" measuredW="32" measuredH="32" zOrder="38" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0.25</backgroundAlpha>
+        <borderColor>40463</borderColor>
+        <color>40463</color>
+        <shape>roundRect</shape>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="404" controlTypeID="com.balsamiq.mockups::RoundButton" x="409" y="422" w="86" h="71" measuredW="32" measuredH="32" zOrder="39" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0.25</backgroundAlpha>
+        <borderColor>13576743</borderColor>
+        <color>13576743</color>
+        <shape>roundRect</shape>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="405" controlTypeID="com.balsamiq.mockups::RoundButton" x="409" y="493" w="86" h="71" measuredW="32" measuredH="32" zOrder="40" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0.25</backgroundAlpha>
+        <borderColor>16750848</borderColor>
+        <color>16750848</color>
+        <shape>roundRect</shape>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="406" controlTypeID="com.balsamiq.mockups::RoundButton" x="409" y="564" w="86" h="71" measuredW="32" measuredH="32" zOrder="41" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0.25</backgroundAlpha>
+        <borderColor>40463</borderColor>
+        <color>40463</color>
+        <shape>roundRect</shape>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="407" controlTypeID="com.balsamiq.mockups::RoundButton" x="409" y="634" w="86" h="71" measuredW="32" measuredH="32" zOrder="42" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0.25</backgroundAlpha>
+        <borderColor>13576743</borderColor>
+        <color>13576743</color>
+        <shape>roundRect</shape>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="408" controlTypeID="__group__" x="231" y="159" w="785" h="36" measuredW="785" measuredH="36" zOrder="43" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="785" h="36" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="408"/>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="361" y="8" w="-1" h="-1" measuredW="73" measuredH="21" zOrder="1" locked="false" isInGroup="408">
+          <controlProperties>
+            <text>Mary%20Clever</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="417" controlTypeID="com.balsamiq.mockups::CallOut" x="231" y="372" w="-1" h="-1" measuredW="38" measuredH="40" zOrder="44" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>1</text>
+      </controlProperties>
+    </control>
+    <control controlID="418" controlTypeID="com.balsamiq.mockups::FieldSet" x="232" y="295" w="151" h="133" measuredW="200" measuredH="170" zOrder="45" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Filter</text>
+      </controlProperties>
+    </control>
+    <control controlID="419" controlTypeID="com.balsamiq.mockups::ComboBox" x="236" y="342" w="134" h="-1" measuredW="53" measuredH="24" zOrder="46" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Any</text>
+      </controlProperties>
+    </control>
+    <control controlID="420" controlTypeID="com.balsamiq.mockups::Label" x="236" y="321" w="-1" h="-1" measuredW="34" measuredH="21" zOrder="47" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Room</text>
+      </controlProperties>
+    </control>
+    <control controlID="421" controlTypeID="com.balsamiq.mockups::CallOut" x="318" y="346" w="-1" h="-1" measuredW="38" measuredH="40" zOrder="48" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>1</text>
+      </controlProperties>
+    </control>
+    <control controlID="422" controlTypeID="com.balsamiq.mockups::ComboBox" x="236" y="395" w="134" h="-1" measuredW="53" measuredH="24" zOrder="49" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Any</text>
+      </controlProperties>
+    </control>
+    <control controlID="423" controlTypeID="com.balsamiq.mockups::Label" x="236" y="374" w="-1" h="-1" measuredW="57" measuredH="21" zOrder="50" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Employee</text>
+      </controlProperties>
+    </control>
+    <control controlID="424" controlTypeID="com.balsamiq.mockups::Canvas" x="231" y="205" w="785" h="70" measuredW="100" measuredH="70" zOrder="51" locked="false" isInGroup="-1"/>
+    <control controlID="425" controlTypeID="com.balsamiq.mockups::IconLabel" x="252" y="221" w="-1" h="-1" measuredW="81" measuredH="39" zOrder="52" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>patient%26bm%3Bpatient.bmml%26bm%3Bpatient.bmml%26bm%3Bpatient.bmml</href>
+        <icon>ContactIcon%7Csmall</icon>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22182%2C111%2C263%2C150%22%20href%3D%22patient.bmml%22%20alt%3D%22patient%22%20id%3D%22425%22/%3E</map>
+        <text>Personal%20data</text>
+      </controlProperties>
+    </control>
+    <control controlID="426" controlTypeID="com.balsamiq.mockups::IconLabel" x="344" y="221" w="-1" h="-1" measuredW="70" measuredH="39" zOrder="53" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>diagnostics%26bm%3Bdiagnostics.bmml%26bm%3Bdiagnostics.bmml%26bm%3Bdiagnostics.bmml</href>
+        <icon>SearchIcon%7Csmall</icon>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22274%2C111%2C344%2C150%22%20href%3D%22diagnostics.bmml%22%20alt%3D%22diagnostics%22%20id%3D%22426%22/%3E</map>
+        <text>Diagnostics</text>
+      </controlProperties>
+    </control>
+    <control controlID="427" controlTypeID="com.balsamiq.mockups::IconLabel" x="429" y="221" w="-1" h="-1" measuredW="82" measuredH="39" zOrder="54" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>appointments%26bm%3Bappointments.bmml%26bm%3Bappointments.bmml%26bm%3Bappointments.bmml</href>
+        <icon>CalendarIcon%7Csmall</icon>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22359%2C111%2C441%2C150%22%20href%3D%22appointments.bmml%22%20alt%3D%22appointments%22%20id%3D%22427%22/%3E</map>
+        <text>Appointments</text>
+      </controlProperties>
+    </control>
+    <control controlID="428" controlTypeID="com.balsamiq.mockups::IconLabel" x="531" y="221" w="-1" h="-1" measuredW="37" measuredH="39" zOrder="55" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>bonds%26bm%3Bbonds.bmml%26bm%3Bbonds.bmml%26bm%3Bbonds.bmml</href>
+        <icon>TableIcon%7Csmall</icon>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22461%2C111%2C498%2C150%22%20href%3D%22bonds.bmml%22%20alt%3D%22bonds%22%20id%3D%22428%22/%3E</map>
+        <text>Bonds</text>
+      </controlProperties>
+    </control>
+    <control controlID="429" controlTypeID="com.balsamiq.mockups::IconLabel" x="592" y="221" w="-1" h="-1" measuredW="49" measuredH="39" zOrder="56" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>patient-invoices%26bm%3Bpatient-invoices.bmml%26bm%3Bpatient-invoices.bmml%26bm%3Bpatient-invoices.bmml</href>
+        <icon>StopIcon%7Csmall</icon>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22522%2C111%2C571%2C150%22%20href%3D%22patient-invoices.bmml%22%20alt%3D%22patient-invoices%22%20id%3D%22429%22/%3E</map>
+        <text>Invoices</text>
+      </controlProperties>
+    </control>
+    <control controlID="430" controlTypeID="com.balsamiq.mockups::IconLabel" x="664" y="221" w="-1" h="-1" measuredW="49" measuredH="39" zOrder="57" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>patient-timeline%26bm%3Bpatient-timeline.bmml%26bm%3Bpatient-timeline.bmml%26bm%3Bpatient-timeline.bmml</href>
+        <icon>SmallClockIcon%7Csmall</icon>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22594%2C111%2C643%2C150%22%20href%3D%22patient-timeline.bmml%22%20alt%3D%22patient-timeline%22%20id%3D%22430%22/%3E</map>
+        <text>Timeline</text>
+      </controlProperties>
+    </control>
+    <control controlID="431" controlTypeID="com.balsamiq.mockups::IconLabel" x="736" y="225" w="-1" h="-1" measuredW="31" measuredH="39" zOrder="58" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>patient-cash%26bm%3Bpatient-cash.bmml%26bm%3Bpatient-cash.bmml%26bm%3Bpatient-cash.bmml</href>
+        <icon>EuroIcon%7Csmall</icon>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22666%2C115%2C697%2C154%22%20href%3D%22patient-cash.bmml%22%20alt%3D%22patient-cash%22%20id%3D%22431%22/%3E</map>
+        <text>Cash</text>
+      </controlProperties>
+    </control>
+    <control controlID="433" controlTypeID="com.balsamiq.mockups::Image" x="70" y="110" w="150" h="42" measuredW="77" measuredH="79" zOrder="59" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>board%26bm%3Bboard.bmml%26bm%3Bboard.bmml%26bm%3Bboard.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%220%2C0%2C150%2C42%22%20href%3D%22board.bmml%22%20alt%3D%22board%22%20id%3D%22433%22/%3E</map>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="434" controlTypeID="com.balsamiq.mockups::Accordion" x="70" y="153" w="150" h="445" measuredW="150" measuredH="267" zOrder="60" locked="false" isInGroup="-1">
+      <controlProperties>
+        <hrefs>board%26bm%3Bboard.bmml%26bm%3Bboard.bmml%26bm%3Bboard.bmml%2CPatient%20list%26bm%3BPatient%20list.bmml%26bm%3BPatient%20list.bmml%26bm%3BPatient%20list.bmml%2Caccounting%26bm%3Baccounting.bmml%26bm%3Baccounting.bmml%26bm%3Baccounting.bmml%2Ccash%26bm%3Bcash.bmml%26bm%3Bcash.bmml%26bm%3Bcash.bmml%2Ccalendar%26bm%3Bcalendar.bmml%26bm%3Bcalendar.bmml%26bm%3Bcalendar.bmml%2Cmessages%26bm%3Bmessages.bmml%26bm%3Bmessages.bmml%26bm%3Bmessages.bmml%2Cadministration%26bm%3Badministration.bmml%26bm%3Badministration.bmml%26bm%3Badministration.bmml</hrefs>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%220%2C43%2C150%2C73%22%20href%3D%22board.bmml%22%20alt%3D%22board%22%20id%3D%22434%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%220%2C70%2C150%2C100%22%20href%3D%22Patient%2520list.bmml%22%20alt%3D%22Patient%20list%22%20id%3D%22434%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%220%2C97%2C150%2C127%22%20href%3D%22accounting.bmml%22%20alt%3D%22accounting%22%20id%3D%22434%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%220%2C124%2C150%2C154%22%20href%3D%22cash.bmml%22%20alt%3D%22cash%22%20id%3D%22434%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%220%2C151%2C150%2C181%22%20href%3D%22calendar.bmml%22%20alt%3D%22calendar%22%20id%3D%22434%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%220%2C178%2C150%2C208%22%20href%3D%22messages.bmml%22%20alt%3D%22messages%22%20id%3D%22434%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%220%2C205%2C150%2C235%22%20href%3D%22administration.bmml%22%20alt%3D%22administration%22%20id%3D%22434%22/%3E%0A</map>
+        <selectedIndex>-1</selectedIndex>
+        <text>Dashboard%0APatients%0AAccounting%0ACash%0ACalendar%0AMessages%0AAdministration</text>
+        <verticalScrollbar>false</verticalScrollbar>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

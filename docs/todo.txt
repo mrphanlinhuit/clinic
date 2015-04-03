@@ -1,0 +1,132 @@
+
+*************
+* Dashboard *
+*************
+
+	OK - Add an optional image to news	
+	OK - When you select a diagnostic in "Phone date" all the open diagnostics of the selected patient should appear without need to write.
+	(!) - The phone date scheduling is difficult to use. There should be some way to view the calendar so the employee who answer the phone can see which rooms and employees are free.	
+	OK - We should also add a "review" field in phone date. This will be added as a review associated to the diagnostic.
+	(!) - Next appointments should show from the current day.
+	OK - When you create a new "phone date" from dashboard:
+			- If the patient does not exist
+				- A new patient is created
+					- A new diagnostic is added to the patient
+						-  A new treatment is scheduled to the diagnostic
+			- If the patient exists
+				- If the  diagnostic does not exist
+					- A new diagnostic is added to the patient
+						- A new treatment is scheduled to the diagnostic
+				- If the diagnostic exists
+					- A new treatment is scheduled to the diagnostic
+			
+
+**************************
+* Administration section *
+**************************
+	
+	* Clinic data*
+	----------	
+	OK - Changing clinic name changes user name
+	 
+	 * Treatments *
+	----------	
+	OK - Treatments duration is in minutes. It must be used when scheduling
+	 
+	 
+********************
+* Patients section *
+********************
+
+	* Patient List *
+	----------------
+	OK - "Under treatment" status is not shown when false	
+
+
+	* Patient *
+	-----------
+	OK - Tags are not suggested
+	OK - Dragging files that are not images to the profile picture area should not be allowed. 
+	OK - When dragging a file to the photo area the attachment progress bar is updated.
+
+	* Diagnostic *
+	--------------	
+	OK - Tags are not suggested
+	
+	
+	* Appointments *
+	----------------
+	OK - Mark as missed/received don't working
+	OK		- When we mark a session as missed it should show some icon...
+	OK		- When marking as missed/received screen should update
+	OK - Scheduling sessions should allow selecting the time, not only the date with a length given by the treatment length.
+	OK - Scheduling sessions should allow selecting the employee
+	OK - "Sessions Received" counter is not well calculated: it is the number of sessions marked as received 
+	(!) - When we schedule a new session the "Sessions scheduled" counter is not updated
+	(!) - The prescription box should also show the associated diagnostic.
+	OK - Dates should be always dd/mm/yyyy
+	(!) - We cannot schedule more sessions than -> Prescribed + missed - scheduled
+
+	* Bonds *
+	---------
+	(!) - We cannot associate a "Received session" (to be paid) with the bond
+	
+	* Cash * 
+	--------
+	OK - Please, review the mockups
+			- No "Card this day", "money this day" ...
+			- Screen should show received sessions to be paid.
+	
+
+********************
+* Calendar section *
+********************
+	OK - Cannot create new session from Calendar view
+	OK - When scheduling sessions from Calendar view, we must be able to select the time not only the date with a length given by the treatment length. Now they are always "all the day"
+	OK - When scheduling sessions from Calendar view:
+			- The patient must exist
+				- The diagnostic must exists (dropdown select box)
+					- The treatment must exist and have sessions prescribed but not scheduled  (dropdown select box)
+	
+	OK - Calendar should show clinic open and closing hours (I mean in the week and day view of the calendar, not in each appointment)
+
+
+****************
+* Cash section *
+****************
+
+	* Movements *
+	------------
+	OK - When pushing "Add spending"  the modal of devolution is shown
+	OK - Add a "date" field to the movements screen
+	OK - Add a "date" field to the "Add spending" screen
+	OK - By default show all the movements. If something is selected in the calendar filter then apply the filter.
+	OK - Money this day, card this day and total this day is not calculated
+	OK - You cannot set the amount for devolution, it is always of the same type and amount than the line selected.
+
+	* Statistics *
+	------------	
+	- Not working
+
+**********************
+* Accounting section *
+**********************
+	OK - When adding a new invoice screen should update
+	OK - Statistics not working
+	(!) - Download not working
+	OK - Client invoices not working.	(In development)
+		- When you push "Invoice Selected" by default you should use the patient data
+		- When you push "Invoice Selected" Amount is the price
+		- When you push "Invoice Selected" Number is a sequential number
+		- When you push "Amendment Bill" Number is another sequential number 
+		- When you push "Amendment Bill" Amount is the amount of the orginal invoice
+		- You cannot make two "amendment bills" of the same invoice
+		- Corrected invoice don't appear in "ammendment bills"
+		- Fiscal ID and VAT ID is the same concept
+	
+	
+	
+********************
+* Messages section *
+********************
+	

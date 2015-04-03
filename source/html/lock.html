@@ -1,0 +1,22 @@
+<div class="page page-lock" ng-controller="LockCtrl">
+    <div class="lock-centered clearfix">
+        <div class="lock-container">
+            <section class="lock-box">
+                <div class="lock-user">
+                    {{user.meta.first_name}} {{user.meta.last_name}}
+                </div>
+                <div class="lock-img">
+                    <img alt="" ng-src="{{ user.meta.profile_img_url | getAvatar }}"/>
+                </div>
+                <div class="lock-pwd">
+                    <form class="form-horizontal" name="form" ng-submit="submit()" novalidate role="form">
+                        <div class="form-group" ng-class="{'has-error': form.$dirty && form.password.$invalid}">
+                            <input class="form-control" name="password" ng-model="password" pattern=".{5,10}" placeholder="Password" required title="5 characters  minimum" type="password"/>
+                            <a class="btn-submit" ng-click="submit()" ng-disabled="form.$invalid"><i class="fa fa-arrow-right"></i></a>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>

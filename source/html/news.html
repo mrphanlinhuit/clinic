@@ -1,0 +1,77 @@
+<div class="page page-table table-dynamic">
+    <div class="panel panel-default table-dynamic" ng-controller="NewsCtrl">
+        <div class="panel-heading">
+            <strong><span class="fa fa-medkit"></span>  News   </strong>
+        </div>
+        <div class="panel-body">
+            <div class="row text-small">
+                <div class="col-sm-offset-8 col-sm-4">
+                    <div class="input-group form-search">
+                        <span class="input-group-addon icon"><i class="fa fa-search"></i></span>
+                        <input class="input-sm form-control" ng-enter="search()" ng-model="q" placeholder="Search" type="text"><span class="input-group-btn"><button class="btn btn-sm btn-default" ng-click="search()" type="button">Go!</button></span></input>
+                    </div>
+                </div>
+            </div>
+            <div class="divider">
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped ">
+                    <thead>
+                        <tr>
+                            <th>
+                                <div class="th" ng-class="{'sort-active': sort === 'title', 'sort-asc': order === 'asc', 'sort-desc': order === 'desc'}" ng-click="sortBy('title')">
+                                    Title
+                                    <span class="sort-action pull-right"><i class="fa fa-lg fa-caret-down"></i><i class="fa fa-lg fa-caret-up"></i></span>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th">
+                                    Description                            
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th">
+                                    Action
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="news in results.data">
+                            <td ng-bind="news.title">
+                            </td>
+                            <td>
+                                {{ news.description }}
+                            </td>
+                            <td class="text-center">
+                                <a class="btn-icon btn-icon-sm bg-info" href="javascript:;" ng-click="open(news.id)"><i class="fa fa-pencil"></i></a>
+                                <a class="btn-icon btn-icon-sm bg-danger" href="javascript:;" ng-click="delete(news.id)"><i class="fa fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <footer class="table-footer">
+                <div class="row">
+                    <div class="col-md-6 page-num-info">
+                        <p class="m-t inline">
+                            {{ results.from }}-{{ results.to }} of {{ results.total }} items
+                            <select ng-change="changeLimit(results.per_page)" ng-model="results.per_page" ng-options="obj for obj in perpage">
+                            </select>
+                            per page
+                        </p>
+                    </div>
+                    <div class="col-md-6 text-right pagination-container">
+                        <pagination boundary-links="true" class="pagination-sm" items-per-page="results.per_page" ng-change="goTo(results.current_page)" ng-model="results.current_page" rotate="false" total-items="results.total">
+                        </pagination>
+                    </div>
+                </div>
+                <div class="divider">
+                </div>
+                <p class="text-right">
+                    <button class="btn btn-success" ng-click="open()" type="button">Create Article</button>
+                </p>
+            </footer>
+        </div>
+    </div>
+</div>

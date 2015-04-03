@@ -1,0 +1,129 @@
+<div class="page page-general" ng-controller="InvoiceCtrl">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <h4 class="text-center">
+                {{invoice.number}}
+            </h4>
+        </div>
+    </div>
+    <div class="row">
+        <form class="form-horizontal" name="form" ng-submit="save()" novalidate>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" for=""> Date</label>
+                    <div class="col-sm-9">
+                        <input class="form-control input-sm" id="date" name="date" ng-model="invoice.date" placeholder="dd/mm/yyyy" required type="text"/>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <section class="panel panel-default">
+                    <div class="panel-heading">
+                        <strong><span class="fa fa-th"></span> Name</strong>
+                    </div>
+                    <div class="panel-body">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <input class="form-control input-sm" id="name" name="name" ng-model="invoice.name" placeholder="Name" required type="text"/>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control input-sm" id="address" name="address" ng-model="invoice.address" placeholder="Address" required type="text"/>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control input-sm" id="fiscalcode" name="fiscalcode" ng-model="invoice.fiscalcode" placeholder="Fiscal code" required type="text"/>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </form>
+    </div>
+    <h3>
+        Items
+    </h3>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        <div class="th">
+                            Title
+                        </div>
+                    </th>
+                    <th>
+                        <div class="th">
+                            Tax Rate
+                        </div>
+                    </th>
+                    <th>
+                        <div class="th">
+                            Price without taxes
+                        </div>
+                    </th>
+                    <th>
+                        <div class="th">
+                            Total Price
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        {{invoice.description}}
+                    </td>
+                    <td>
+                        {{ (invoice.taxes * 100)}}%
+                    </td>
+                    <td>
+                        {{invoice.amount}}
+                    </td>
+                    <td>
+                        {{(invoice.amount + (invoice.amount * invoice.taxes)) | number:2}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="row text-small">
+            <div class="col-md-4">
+                <button class="btn btn-success" type="button">Download PDF</button>
+            </div>
+            <div class="col-sm-offset-8 col-sm-4">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                <div class="th">
+                                    Total without taxes
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th">
+                                    Taxes
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th">
+                                    Total
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                {{invoice.amount}}
+                            </td>
+                            <td>
+                                {{ (invoice.taxes * 100)}}%
+                            </td>
+                            <td>
+                                {{ (invoice.amount + (invoice.amount * invoice.taxes)) | number:2}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

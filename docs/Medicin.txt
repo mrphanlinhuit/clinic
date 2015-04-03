@@ -1,0 +1,30 @@
+The software is intended to be used in a physiotherapy / medical clinic. 
+
+We will have doctors and therapists. In the first visit of a new patient, the doctor attends the patient, makes a diagnostic and prescribes a number of physiotherapy sessions. The patient then go to our cashier who makes appointments for the physiotherapy sessions prescribed by the doctor. In the following visits to our clinic, the patient will receive the physiotherapy session and pay to the cashier for each session. We also consider using bonds of ten sessions or something like that. 
+
+In every moment the doctor will have access to the patients history of treatment so they can change the treatment and prescribe more sessions or ask for a new appointment with the patient, so the cashiers are aware of that and can schedule more appointments.
+
+
+The job of course includes building the html/css. I may provide handwritted mockups if necessary but the Rainbow theme in themeforest.net is a very good starting point of what I want.
+
+The job includes developing the database, the backend (using a REST API) and the frontend. Using Laravel is preferible for me because I am used to it, but if you feel more comfortable using another language it is not a problem.
+
+
+Briefly, some of the features will be the following:
+
+- User and role management: some of the roles will be superadministrator, manager (financial things and statistics), doctor, therapist, cashier (cash things and patient scheduling)
+
+- Patients and diagnostics management: description of the diagnostics where you can add new data, add files, prescribe physiotherapy sessions...
+
+- Contability and financial management: Cash, Invoices (received and sent), providers, statistics, treatment bonds, prices...
+
+- Rooms management: a physiotherapy session is given by one therapist in one room, that can be opened or closed.
+
+- Calendar scheduling and dates management: we need to easily assign dates with a free therapist / doctor to our patients.
+
+
+
+In next versions we will also develop features like:
+- Messaging between users
+- Surveys to know the evolution of the users to be completed from a mobile device (so the therapist can note the evolution with the surveys in an easy way)
+- Statistics: we need statistics of almost everything, for the financial side but also for the medical side.

@@ -1,0 +1,179 @@
+<div class="page page-general page-profile" ng-controller="UserCtrl">
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="nav nav-boxed nav-justified">
+                <li class="open">
+                    <a ng-href="#/user/list"><i class="color-success fa fa-users"></i> User</a>
+                </li>
+                <li>
+                    <a ng-href="#/administration/treatments"><i class="color-warning fa fa-hand-o-up"></i> Treatments</a>
+                </li>
+                <li>
+                    <a ng-href="#/administration/bonds"><i class="color-danger fa fa-ticket"></i> Bonds</a>
+                </li>
+                <li>
+                    <a ng-href="#/administration/rooms"><i class="color-info fa fa-table"></i> Rooms</a>
+                </li>
+                <li>
+                    <a ng-href="#/administration/pathologies"><i class="color-gray fa fa-frown-o"></i> Pathologies</a>
+                </li>
+                <li>
+                    <a ng-href="#/administration/referers"><i class="color-info-alt fa fa-refresh"></i> Referers</a>
+                </li>
+                <li>
+                    <a ng-href="#/administration/clinic"><i class="color-primary fa fa-medkit"></i> Clinic data</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <section class="panel panel-default">
+        <div class="panel-heading">
+            <strong><span class="fa fa-th"></span> User</strong>
+        </div>
+        <div class="panel-body">
+            <ol class="breadcrumb">
+                <li>
+                    <a href="#/user/list">Users</a>
+                </li>
+                <li class="active">
+                    <a>{{ user.id ? user.meta.first_name + " " + user.meta.last_name : "New User" }}</a>
+                </li>
+            </ol>
+            <form class="form-horizontal" name="form" ng-submit="save()" novalidate>
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="last_name">Surname</label>
+                            <div class="col-sm-4" ng-class="{'has-error': form.$dirty && form.last_name.$invalid}">
+                                <input class="form-control input-sm" id="last_name" name="last_name" ng-model="user.meta.last_name" placeholder="Surname" required type="text" maxlength="32"/>
+                            </div>
+                            <label class="col-sm-2 control-label" for="first_name">Name</label>
+                            <div class="col-sm-4" ng-class="{'has-error': form.$dirty && form.first_name.$invalid}">
+                                <input class="form-control input-sm" id="first_name" name="first_name" ng-model="user.meta.first_name" placeholder="Name" required type="text" maxlength="32"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="national_id">National ID</label>
+                            <div class="col-sm-4">
+                                <input class="form-control" id="national_id" name="national_id" ng-model="user.meta.national_id" placeholder="National ID" type="text"/>
+                            </div>
+                            <label class="col-sm-2 control-label" for="address1">Address</label>
+                            <div class="col-sm-4">
+                                <input class="form-control" id="address1" name="address1" ng-model="user.meta.address1" placeholder="Address" type="text"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="job">Job</label>
+                            <div class="col-sm-4">
+                                <input class="form-control" id="job" name="job" ng-model="user.meta.job" placeholder="Job" type="text"/>
+                            </div>
+                            <label class="col-sm-2 control-label" for="professional_number">Professional number</label>
+                            <div class="col-sm-4">
+                                <input class="form-control" id="professional_number" name="professional_number" ng-model="user.meta.professional_number" placeholder="Professional number" type="text"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="postal">Zip Code</label>
+                            <div class="col-sm-4">
+                                <input class="form-control input-sm" id="postal" name="postal" ng-model="user.meta.postal" placeholder="Zip Code" type="text"/>
+                            </div>
+                            <label class="col-sm-2 control-label" for="province">Province</label>
+                            <div class="col-sm-4">
+                                <input class="form-control input-sm" id="province" name="province" ng-model="user.meta.province" placeholder="Province" type="text"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="locality">Locality</label>
+                            <div class="col-sm-4">
+                                <select class="form-control" id="locality" name="locality" ng-model="user.meta.city" ng-options="obj.key as obj.name for obj in postals" type="text">
+                                </select>
+                            </div>
+                            <label class="col-sm-2 control-label" for="country">Country</label>
+                            <div class="col-sm-4">
+                                <select class="form-control" id="country" name="country" ng-model="user.meta.country" ng-options="obj.key as obj.name for obj in countries" type="text">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="phone">Phone</label>
+                            <div class="col-sm-4">
+                                <input class="form-control input-sm" id="phone" name="phone" ng-model="user.meta.phone" placeholder="Phone" type="text"/>
+                            </div>
+                            <label class="col-sm-2 control-label" for="mobile">Mobile</label>
+                            <div class="col-sm-4">
+                                <input class="form-control input-sm" id="mobile" name="mobile" ng-model="user.meta.mobile" placeholder="Mobile" type="text"/>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{'has-error': form.$dirty && form.email.$invalid}">
+                            <label class="col-sm-2 control-label" for="email">Email</label>
+                            <div class="col-sm-4">
+                                <input class="form-control input-sm" id="email" name="email" ng-model="user.credential.email" placeholder="Email" type="text" maxlength="128"/>
+                            </div>
+                            <label class="col-sm-2 control-label" for="status">Status</label>
+                            <div class="col-sm-4">
+                                <select class="form-control" id="status" name="status" ng-model="user.status" ng-options="obj.key as obj.label for obj in statuses">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="birthday">Birthday</label>
+                            <div class="col-sm-4">
+                                <div class="input-group ui-datepicker">
+                                    <input class="form-control" close-text="Close" datepicker-options="dateOptions" datepicker-popup="MM/dd/yyyy" is-open="opened" ng-model="user.meta.birthday" placeholder="Birthday" type="text"><span class="input-group-addon" ng-click="open($event)"><i class="fa fa-calendar"></i></span></input>
+                                </div>
+                            </div>
+                            <label class="col-sm-2 control-label" for="gender">Gender</label>
+                            <div class="col-sm-4">
+                                <select class="form-control" id="gender" name="gender" ng-model="user.meta.gender" ng-options="obj.key as obj.label for obj in genders" type="text">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{'has-error': form.$dirty && form.password.$invalid && form.repassword.$invalid}">
+                            <label class="col-sm-2 control-label" for="password">Password</label>
+                            <div class="col-sm-4">
+                                <input class="form-control input-sm" id="password" name="password" ng-model="user.credential.password" type="password"/>
+                            </div>
+                            <label class="col-sm-2 control-label" for="repassword">Re-Password</label>
+                            <div class="col-sm-4">
+                                <input class="form-control input-sm" id="repassword" name="repassword" ng-model="user.credential.repassword" type="password"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="avatar" ng-file-drop ng-file-over ng-show="uploader.isHTML5">
+                            <a class="remove btn-icon btn-icon-sm btn-danger" href="javascript:;" ng-click="removeAvatar()"><i class="fa fa-times"></i></a>
+                            <img class="img-on-load img-responsive" ng-click="avatarModal()" ng-src="{{user.meta.profile_img_url | getAvatar}}"/>
+                            <div class="text-center">
+                                Drag and drop files here
+                                <div ng-show="showprogress">
+                                    <progressbar class="progressbar-sm progress-striped active" ng-show="progress > 0" value="progress">
+                                        <span>{{progress}}%</span>
+                                    </progressbar>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <strong><span class="fa fa-key"></span> Roles</strong>
+                            </div>
+                            <div class="panel-body">
+                                <div class="panel-body">
+                                    <div class="form-group" ng-repeat="obj in roles">
+                                        <label class="ui-checkbox"><input name="role_id[]" ng-checked="user.role_id.indexOf(obj.id) > -1" ng-click="toggleRole(obj.id)" type="checkbox" value="{{obj.id}}"/><span ng-bind="obj.description"></span></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-right">
+                    <button class="btn" ng-click="dismiss()" type="button">Revert</button>
+                    <button class="btn btn-success" ng-disabled="form.$invalid" type="submit">Save changes</button>
+                </p>
+                <p ng-hide="user.register">
+                    Created {{user.created_at | mydatetime}} by {{user.created_by_name}}. Last modified {{user.updated_at | mydatetime}} by {{user.updated_by_name}}.
+                </p>
+            </form>
+        </div>
+    </section>
+</div>

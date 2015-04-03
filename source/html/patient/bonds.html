@@ -1,0 +1,106 @@
+<div class="page page-general page-patient" ng-controller="UserCtrl">
+    <div class="panel panel-default table-dynamic">
+        <div class="panel-body">
+            <h4 class="text-center">
+                {{ user.id ? user.meta.first_name + " " + user.meta.last_name : "" }}
+            </h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="nav nav-boxed nav-justified">
+                <li>
+                    <a ng-href="{{ (user.id) ? '#/patient/' + user.id : '#/patient/new' }}"><i class="color-success fa fa-user"></i>Personal data</a>
+                </li>
+                <li>
+                    <a ng-href="{{ (user.id) ? '#/patient/diagnostics/' + user.id : '' }}"><i class="color-warning fa fa-search"></i>Diagnostics</a>
+                </li>
+                <li>
+                    <a ng-href="{{ (user.id) ? '#/patient/appointments/' + user.id : '' }}"><i class="color-danger fa fa-building"></i>Appointments</a>
+                </li>
+                <li class="open">
+                    <a ng-href="{{ (user.id) ? '#/patient/bonds/' + user.id : '' }}"><i class="color-info fa fa-ticket"></i>Bonds</a>
+                </li>
+                <li>
+                    <a ng-href="{{ (user.id) ? '#/patient/invoices/' + user.id : '' }}"><i class="color-gray fa fa-file-text-o"></i>Invoices</a>
+                </li>
+                <li>
+                    <a ng-href="{{ (user.id) ? '#/patient/timeline/' + user.id : '' }}"><i class="color-info-alt fa fa-clock-o"></i>Timeline</a>
+                </li>
+                <li>
+                    <a ng-href="{{ (user.id) ? '#/patient/cash/' + user.id : '' }}"><i class="color-primary fa fa-eur"></i>Cash</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="panel panel-default table-dynamic" ng-controller="PatientBondCtrl">
+        <div class="panel-heading">
+            <strong>Bonds</strong>
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                <div class="th" ng-class="{'sort-active': sort === 'name', 'sort-asc': order === 'asc', 'sort-desc': order === 'desc'}" ng-click="sortBy('name')">
+                                    Name
+                                    <span class="sort-action pull-right"><i class="fa fa-lg fa-caret-down"></i><i class="fa fa-lg fa-caret-up"></i></span>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th" ng-class="{'sort-active': sort === 'created_at', 'sort-asc': order === 'asc', 'sort-desc': order === 'desc'}" ng-click="sortBy('created_at')">
+                                    Date bought
+                                    <span class="sort-action pull-right"><i class="fa fa-lg fa-caret-down"></i><i class="fa fa-lg fa-caret-up"></i></span>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th">
+                                    Sessions
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th">
+                                    <span>Consumed sessions</span>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th" ng-class="{'sort-active': sort === 'expired_at', 'sort-asc': order === 'asc', 'sort-desc': order === 'desc'}">
+                                    Expiration Date
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th">
+                                    Action
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="bond in results.data">
+                            <td ng-bind="bond.name">
+                            </td>
+                            <td ng-bind="bond.created_at | mydate">
+                            </td>
+                            <td ng-bind="bond.sessions">
+                            </td>
+                            <td ng-bind="bond.session">
+                            </td>
+                            <td ng-bind="bond.expired_at | mydate">
+                            </td>
+                            <td class="text-center">
+                                <a class="btn-icon btn-icon-sm bg-info" href="javascript:;" ng-click="associatebond(bond.bond_id)"><i class="fa fa-eye"></i></a>
+                                <a class="btn-icon btn-icon-sm bg-danger" href="javascript:;" ng-click="remove(bond.id)"><i class="fa fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <footer class="table-footer">
+                <p class="text-right">
+                    <button class="btn btn-success" ng-click="new(user.id)" type="button"> Add new bond</button>
+                </p>
+            </footer>
+        </div>
+    </div>
+</div>

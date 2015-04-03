@@ -1,0 +1,127 @@
+<div class="page page-general page-patient" ng-controller="UserCtrl">
+    <div class="panel panel-default table-dynamic">
+        <div class="panel-body">
+            <h4 class="text-center">
+                {{ user.id ? user.meta.first_name + " " + user.meta.last_name : "" }}
+            </h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="nav nav-boxed nav-justified">
+                <li>
+                    <a ng-href="{{ (user.id) ? '#/patient/' + user.id : '#/patient/new' }}"><i class="color-success fa fa-user"></i>Personal data</a>
+                </li>
+                <li>
+                    <a ng-href="{{ (user.id) ? '#/patient/diagnostics/' + user.id : '' }}"><i class="color-warning fa fa-search"></i>Diagnostics</a>
+                </li>
+                <li class="open">
+                    <a ng-href="{{ (user.id) ? '#/patient/appointments/' + user.id : '' }}"><i class="color-danger fa fa-building"></i>Appointments</a>
+                </li>
+                <li>
+                    <a ng-href="{{ (user.id) ? '#/patient/bonds/' + user.id : '' }}"><i class="color-info fa fa-ticket"></i>Bonds</a>
+                </li>
+                <li>
+                    <a ng-href="{{ (user.id) ? '#/patient/invoices/' + user.id : '' }}"><i class="color-gray fa fa-file-text-o"></i>Invoices</a>
+                </li>
+                <li>
+                    <a ng-href="{{ (user.id) ? '#/patient/timeline/' + user.id : '' }}"><i class="color-info-alt fa fa-clock-o"></i>Timeline</a>
+                </li>
+                <li>
+                    <a ng-href="{{ (user.id) ? '#/patient/cash/' + user.id : '' }}"><i class="color-primary fa fa-eur"></i>Cash</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div ng-controller="AppointmentsCtrl">
+        <div class="panel panel-default table-dynamic" ng-hide="prescriptions">
+            <div class="panel-heading">
+                <strong><span class="fa fa-medkit"></span> Prescription</strong>
+            </div>
+            <div class="panel-body">
+                No Results Found
+            </div>
+        </div>
+        <div class="panel panel-default table-dynamic" ng-repeat="item in prescriptions">
+            <div class="panel-heading">
+                <strong><span class="fa fa-medkit"></span> Prescription ({{item.created_at | mydate}})</strong>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <strong>Treatment</strong>
+                        </div>
+                        <div class="form-group">
+                            {{item.treatment}}
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <i class="fa fa-chevron-circle-right fa-4x color-warning"></i>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <h1>
+                                            {{item.sessions}}
+                                        </h1>
+                                    </div>
+                                    <div class="col-xs-12 text-center">
+                                        Sessions Prescribed
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <i class="fa fa fa-table fa-4x color-info"></i>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <h1>
+                                            {{item.scheduled}}
+                                        </h1>
+                                    </div>
+                                    <div class="col-xs-12 text-center">
+                                        Sessions Scheduled
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <i class="fa fa-check-circle fa-4x color-success"></i>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <h1>
+                                            {{item.received}}
+                                        </h1>
+                                    </div>
+                                    <div class="col-xs-12 text-center">
+                                        Sessions Received
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="notes">Note</label>
+                    <p ng-bind="item.notes">
+                    </p>
+                </div>
+                <session-list prescription="item" rooms="rooms" user="user">
+                </session-list>
+            </div>
+        </div>
+    </div>
+</div>

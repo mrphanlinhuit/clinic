@@ -1,0 +1,163 @@
+<div class="page page-general page-patient" ng-controller="UserCtrl">
+    <div class="panel panel-default table-dynamic">
+        <div class="panel-body">
+            <h4 class="text-center">
+            {{ user.id ? user.meta.first_name + " " + user.meta.last_name : "" }}
+            </h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="nav nav-boxed nav-justified">
+                <li>
+                    <a ng-href="{{ (user.id) ? '#/patient/' + user.id : '#/patient/new' }}"><i class="color-success fa fa-user"></i>Personal data</a>
+                </li>
+                <li class="open">
+                    <a ng-href="{{ (user.id) ? '#/patient/diagnostics/' + user.id : '' }}"><i class="color-warning fa fa-search"></i>Diagnostics</a>
+                </li>
+                <li>
+                    <a ng-href="{{ (user.id) ? '#/patient/appointments/' + user.id : '' }}"><i class="color-danger fa fa-building"></i>Appointments</a>
+                </li>
+                <li>
+                    <a ng-href="{{ (user.id) ? '#/patient/bonds/' + user.id : '' }}"><i class="color-info fa fa-ticket"></i>Bonds</a>
+                </li>
+                <li>
+                    <a ng-href="{{ (user.id) ? '#/patient/invoices/' + user.id : '' }}"><i class="color-gray fa fa-file-text-o"></i>Invoices</a>
+                </li>
+                <li>
+                    <a ng-href="{{ (user.id) ? '#/patient/timeline/' + user.id : '' }}"><i class="color-info-alt fa fa-clock-o"></i>Timeline</a>
+                </li>
+                <li>
+                    <a ng-href="{{ (user.id) ? '#/patient/cash/' + user.id : '' }}"><i class="color-primary fa fa-eur"></i>Cash</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="panel panel-default table-dynamic" ng-controller="DiagnosticsCtrl">
+        <div class="panel-heading">
+            <strong><span class="fa fa-medkit"></span> Diagnostics</strong>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <section class="panel">
+                    <div class="panel-body">
+                        <div class="row text-small">
+                            <div class="col-sm-offset-8 col-sm-4">
+                                <form class="input-group form-search" name="form" ng-submit="search()" role="earch">
+                                    <span class="input-group-addon icon"><i class="fa fa-search"></i></span>
+                                    <input class="input-sm form-control" ng-model="q" placeholder="Search" type="text"><span class="input-group-btn"><button class="btn btn-sm btn-default" ng-click="search()" type="button">Go!</button></span></input>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="divider">
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <div class="th" ng-class="{'sort-active': sort === 'name', 'sort-asc': order === 'asc', 'sort-desc': order === 'desc'}" ng-click="sortBy('name')">
+                                                Name
+                                                <span class="sort-action pull-right"><i class="fa fa-lg fa-caret-down"></i><i class="fa fa-lg fa-caret-up"></i></span>
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="th" ng-class="{'sort-active': sort === 'created_at', 'sort-asc': order === 'asc', 'sort-desc': order === 'desc'}" ng-click="sortBy('created_at')">
+                                                Date added
+                                                <span class="sort-action pull-right"><i class="fa fa-lg fa-caret-down"></i><i class="fa fa-lg fa-caret-up"></i></span>
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="th" ng-class="{'sort-active': sort === 'pathology', 'sort-asc': order === 'asc', 'sort-desc': order === 'desc'}" ng-click="sortBy('pathology')">
+                                                Pathology
+                                                <span class="sort-action pull-right"><i class="fa fa-lg fa-caret-down"></i><i class="fa fa-lg fa-caret-up"></i></span>
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="th" ng-class="{'sort-active': sort === 'author', 'sort-asc': order === 'asc', 'sort-desc': order === 'desc'}" ng-click="sortBy('author')">
+                                                Author
+                                                <span class="sort-action pull-right"><i class="fa fa-lg fa-caret-down"></i><i class="fa fa-lg fa-caret-up"></i></span>
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="th" ng-class="{'sort-active': sort === 'close', 'sort-asc': order === 'asc', 'sort-desc': order === 'desc'}" ng-click="sortBy('close')">
+                                                Closed
+                                                <span class="sort-action pull-right"><i class="fa fa-lg fa-caret-down"></i><i class="fa fa-lg fa-caret-up"></i></span>
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="th">
+                                                Prescribed
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="th">
+                                                Scheduled
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="th">
+                                                Received
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="th text-center">
+                                                Action
+                                            </div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="item in results.data">
+                                        <td ng-bind="item.name">
+                                        </td>
+                                        <td ng-bind="item.created_at | mydate">
+                                        </td>
+                                        <td ng-bind="item.pathology">
+                                        </td>
+                                        <td ng-bind="item.author">
+                                        </td>
+                                        <td ng-bind="item.close">
+                                        </td>
+                                        <td ng-bind="item.sessions">
+                                        </td>
+                                        <td ng-bind="item.scheduled">
+                                        </td>
+                                        <td ng-bind="item.received">
+                                        </td>
+                                        <td class="text-center">
+                                            <a class="btn-icon btn-icon-sm bg-success" ng-href="#/patient/diagnostic/{{item.id}}"><i class="fa fa-eye"></i></a>
+                                            <a class="btn-icon btn-icon-sm bg-info" href="javascript:;" ng-click="openDiagnostic(item.id)"><i class="fa fa-pencil"></i></a>
+                                            <a class="btn-icon btn-icon-sm bg-danger" href="javascript:;" ng-click="delete(item.id)"><i class="fa fa-trash"></i></a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <footer class="table-footer">
+                            <div class="row">
+                                <div class="col-md-6 page-num-info">
+                                    <p class="m-t inline">
+                                    {{ results.from }}-{{ results.to }} of {{ results.total }} items
+                                    <select ng-change="changeLimit(results.per_page)" ng-model="results.per_page" ng-options="obj for obj in perpage">
+                                    </select>
+                                    per page
+                                    </p>
+                                </div>
+                                <div class="col-md-6 text-right pagination-container">
+                                    <pagination boundary-links="true" class="pagination-sm" items-per-page="results.per_page" ng-change="goTo(results.current_page)" ng-model="results.current_page" rotate="false" total-items="results.total">
+                                    </pagination>
+                                </div>
+                            </div>
+                            <div class="divider">
+                            </div>
+                            <p class="text-right">
+                            <button class="btn btn-w-md btn-gap-v btn-success" ng-click="openDiagnostic()" type="button"> Add new Diagnostic</button>
+                            </p>
+                        </footer>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>

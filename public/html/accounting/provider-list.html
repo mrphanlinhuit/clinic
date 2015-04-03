@@ -1,0 +1,101 @@
+<div class="page page-general">
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="nav nav-boxed nav-justified">
+                <li>
+                    <a href="#/accounting/invoices"><i class="color-success fa fa-file-text-o"></i> Client Invoices</a>
+                </li>
+                <li>
+                    <a href="#/accounting/provider-invoices"><i class="color-warning fa fa-file-text"></i> Provider Invoices</a>
+                </li>
+                <li>
+                    <a href="#/accounting/provider-new"><i class="color-danger fa fa-pencil-square-o"></i> New Provider</a>
+                </li>
+                <li class="open">
+                    <a href="#/accounting/provider-list"><i class="color-info fa fa-list-ol"></i>Providers List</a>
+                </li>
+                <li>
+                    <a href="#/accounting/statistics"><i class="color-gray fa fa-bar-chart-o"></i> Statistics</a>
+                </li>
+                <li>
+                    <a href="#/accounting/download"><i class="color-info-alt fa fa-download"></i> Download</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="panel panel-default table-dynamic" ng-controller="ProvidersCtrl">
+        <div class="panel-heading">
+            <strong><span class="fa fa-calculator"></span> Provider List</strong>
+        </div>
+        <div class="panel-body">
+            <div class="row text-small">
+                <div class="col-sm-offset-8 col-sm-4">
+                    <form class="input-group" name="form" role="search" ng-submit="search()">
+                        <span class="input-group-addon icon"><i class="fa fa-search"></i></span>
+                        <input class="input-sm form-control" ng-enter="search()" ng-model="q" placeholder="Search" type="text"><span class="input-group-btn"><button class="btn btn-sm btn-default" ng-click="search()" type="button">  Go! </button></span></input>
+                    </form>
+                </div>
+            </div>
+            <div class="divider">
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                <div class="th" ng-class="{'sort-active': sort === 'name', 'sort-asc': order === 'asc', 'sort-desc': order === 'desc'}" ng-click="sortBy('name')">
+                                    Name
+                                    <span class="sort-action pull-right"><i class="fa fa-lg fa-caret-down"></i><i class="fa fa-lg fa-caret-up"></i></span>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th" ng-class="{'sort-active': sort === 'date_added', 'sort-asc': order === 'asc', 'sort-desc': order === 'desc'}" ng-click="sortBy('date_added')">
+                                    Date added
+                                    <span class="sort-action pull-right"><i class="fa fa-lg fa-caret-down"></i><i class="fa fa-lg fa-caret-up"></i></span>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th text-center">
+                                    Action
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="provider in results.data">
+                            <td ng-bind="provider.name">
+                            </td>
+                            <td ng-bind="provider.created_at | mydate">
+                            </td>
+                            <td class="text-center">
+                                <a class="btn-icon btn-icon-sm bg-info" href="#/accounting/provider/{{provider.id}}"><i class="fa fa-pencil"></i></a>
+                                <a class="btn-icon btn-icon-sm bg-danger" href="javascript:;" ng-click="delete(provider.id)"><i class="fa fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <footer class="table-footer">
+                <div class="row">
+                    <div class="col-md-6 page-num-info">
+                        <p class="m-t inline">
+                            {{ results.from }}-{{ results.to }} of {{ results.total }} items
+                            <select ng-change="changeLimit(results.per_page)" ng-model="results.per_page" ng-options="obj for obj in perpage">
+                            </select>
+                            per page
+                        </p>
+                    </div>
+                    <div class="col-md-6 text-right pagination-container">
+                        <pagination boundary-links="true" class="pagination-sm" items-per-page="results.per_page" ng-change="goTo(results.current_page)" ng-model="results.current_page" rotate="false" total-items="results.total">
+                        </pagination>
+                    </div>
+                </div>
+                <div class="divider">
+                </div>
+                <p class="text-right">
+                    <button class="btn btn-success" href="javascript:;" ng-click="open(provider.id)" type="button">New provider</button>
+                </p>
+            </footer>
+        </div>
+    </div>
+</div>

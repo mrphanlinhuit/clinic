@@ -1,0 +1,63 @@
+<div class="page page-general page-accounting-provider">
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="nav nav-boxed nav-justified">
+                <li>
+                    <a href="#/cash/movements"><i class="color-success fa fa-eur"></i> Movements</a>
+                </li>
+                <li class="open">
+                    <a href="#/cash/statistics"><i class="color-warning fa fa-bar-chart-o"></i> Statistics</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <section class="panel panel-default" ng-controller="CashStatisticsCtrl">
+        <div class="panel-heading">
+            <strong><span class="fa fa-calendar"></span> Cash Statistics</strong>
+        </div>
+        <div class="panel-body">
+            <form class="form-horizontal" name="form" role="form">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="">Start date</label>
+                    <div class="col-sm-4">
+                        <div class="input-group ui-datepicker" ng-click="open($event)">
+                            <input class="form-control" close-text="Close" datepicker-options="dateOptions" datepicker-popup="dd/MM/yyyy" is-open="opened" ng-change="dateFilter()" ng-model="begin" ng-required="true" type="text"/>
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        </div>
+                    </div>
+                    <label class="col-sm-2 control-label" for="">End date</label>
+                    <div class="col-sm-4">
+                        <div class="input-group ui-datepicker" ng-click="open($event)">
+                            <input class="form-control" close-text="Close" datepicker-options="dateOptions" datepicker-popup="dd/MM/yyyy" is-open="opened" ng-change="dateFilter()" ng-model="end" ng-required="true" type="text"/>
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="row">
+                <div class="col-sm-6">
+                    <section class="panel panel-default">
+                        <div class="panel-heading">
+                            <strong><span class="fa fa-calendar"></span> Area Chart</strong>
+                        </div>
+                        <div class="panel-body">
+                            <linechart ng-model="lineChart">
+                            </linechart>
+                        </div>
+                    </section>
+                </div>
+                <div class="col-sm-6">
+                    <section class="panel panel-default">
+                        <div class="panel-heading">
+                            <strong><span class="fa fa-calendar"></span> Donut Chart</strong>
+                        </div>
+                        <div class="panel-body">
+                            <donutchart ng-model="donutChart">
+                            </donutchart>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

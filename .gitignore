@@ -1,0 +1,7 @@
+~*.*
+.*~
+#.gitignore
+.idea/
+node_modules/
+/source/bower_components
+verdor/

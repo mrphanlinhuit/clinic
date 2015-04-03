@@ -1,0 +1,354 @@
+<div class="page page-general page-cash">
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="nav nav-boxed nav-justified">
+                <li>
+                    <a href="javascript:;">
+                        <i class="color-success fa fa-eur">
+                        </i>
+                        Movements
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:;">
+                        <i class="color-warning fa fa-bar-chart-o">
+                        </i>
+                        Statistics
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <br>
+    <div class="page page-table">
+        <section class="panel panel-default table-dynamic">
+            <div class="panel-heading">
+                <strong>
+                <span class="glyphicon glyphicon-th">
+                </span>
+                Movements
+                </strong>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="input-group ui-datepicker">
+                            <input class="form-control" close-text="Close" date-disabled="disabled(date, mode)" datepicker-options="dateOptions" datepicker-popup="{{format}}" is-open="opened" max="'2015-06-22'" min="minDate" ng-model="dt" ng-required="true" type="text">
+                            <span class="input-group-addon">
+                            <i class="fa fa-calendar">
+                            </i>
+                            </span>
+                            </input>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <p>
+                        Card this day:
+                        <span class="h2">
+                        25
+                        </span>
+                        </p>
+                    </div>
+                    <div class="col-md-3">
+                        <p>
+                        Monay this day:
+                        <span class="h2">
+                        11.05
+                        </span>
+                        </p>
+                    </div>
+                    <div class="col-md-3">
+                        <p>
+                        Total this day:
+                        <span class="h2">
+                        35.05
+                        </span>
+                        </p>
+                    </div>
+                </div>
+                <br>
+                <table class="table table-bordered table-striped table-responsive">
+                    <thead>
+                        <tr>
+                            <th>
+                                <div class="th">
+                                    Author
+                                    <span class="glyphicon glyphicon-chevron-down" data-ng-class="{active: row == '-name'}" data-ng-click=" order('-name') ">
+                                    </span>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th">
+                                    Title
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th">
+                                    Amount
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th">
+                                    Invoice
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th">
+                                    Type
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th">
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                Lisa Doe
+                            </td>
+                            <td>
+                                "First Visit" to Mary Clever
+                            </td>
+                            <td>
+                                25
+                            </td>
+                            <td>
+                                FA-2014-001
+                            </td>
+                            <td>
+                                Card
+                            </td>
+                            <td>
+                                <label class="ui-checkbox">
+                                    <input name="checkbox1" type="checkbox" value="option1">
+                                    <span>
+                                    </span>
+                                    </input>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Lisa Doe
+                            </td>
+                            <td>
+                                "Treatment 1" to Mary Clever
+                            </td>
+                            <td>
+                                25
+                            </td>
+                            <td>
+                                FA-2014-002
+                            </td>
+                            <td>
+                                Money
+                            </td>
+                            <td>
+                                <label class="ui-checkbox">
+                                    <input name="checkbox2" type="checkbox" value="option2">
+                                    <span>
+                                    </span>
+                                    </input>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Lisa Doe
+                            </td>
+                            <td>
+                                Coffee and donuts
+                            </td>
+                            <td>
+                                -4.95
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                                Money
+                            </td>
+                            <td>
+                                <label class="ui-checkbox">
+                                    <input name="checkbox3" type="checkbox" value="option3">
+                                    <span>
+                                    </span>
+                                    </input>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Lisa Doe
+                            </td>
+                            <td>
+                                "Treatment 1" to Mary Clever
+                            </td>
+                            <td>
+                                0
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                                Bond
+                            </td>
+                            <td>
+                                <label class="ui-checkbox">
+                                    <input name="checkbox4" type="checkbox" value="option4">
+                                    <span>
+                                    </span>
+                                    </input>
+                                </label>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                </br>
+            </div>
+            <footer class="table-footer">
+                <div class="row">
+                    <div class="col-md-3 page-num-info">
+                        <span>
+                        1 - 5 of 200 items
+                        <select data-ng-change="onNumPerPageChange()" data-ng-model="numPerPage" data-ng-options="num for num in numPerPageOpt">
+                        </select>
+                        per page
+                        </span>
+                    </div>
+                    <div class="col-md-9 text-right pagination-container">
+                        <pagination boundary-links="true" class="pagination-sm" items-per-page="numPerPage" max-size="4" on-select-page="select(page)" page="currentPage" rotate="false" total-items="filteredStores.length">
+                        </pagination>
+                    </div>
+                </div>
+                <div class="text-right" data-ng-controller="ModalDemoCtrl">
+                    <a class="btn btn-danger">
+                        Devolution
+                    </a>
+                    <script id="myModalContent.html" type="text/ng-template">
+                    &lt;div class="modal-body"&gt;
+                    &lt;form class="form-horizontal"&gt;
+                    &lt;div class="form-group"&gt;
+                    &lt;label for="" class="col-sm-2"&gt;Surname
+                    <div class="col-sm-10">
+                        <input class="form-control" type="text">
+                        </input>
+                    </div>
+                    </script>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2" for="label-focus">
+                        Name
+                    </label>
+                    <div class="col-sm-10">
+                        <input class="form-control" id="label-focus" type="text">
+                        </input>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2" for="">
+                        Phone
+                    </label>
+                    <div class="col-sm-10">
+                        <input class="form-control" type="text">
+                        </input>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2" for="">
+                        Diagnostic
+                    </label>
+                    <div class="col-sm-10">
+                        <input class="form-control" type="password">
+                        </input>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2" for="">
+                        Treatment
+                    </label>
+                    <div class="col-sm-10">
+                        <span class="ui-select">
+                        <select>
+                            <option>
+                                Mustard
+                            </option>
+                            <option>
+                                Ketchup
+                            </option>
+                            <option>
+                                Barbecue
+                            </option>
+                        </select>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2" for="">
+                        Employee
+                    </label>
+                    <div class="col-sm-10">
+                        <span class="ui-select">
+                        <select>
+                            <option>
+                                Mustard
+                            </option>
+                            <option>
+                                Ketchup
+                            </option>
+                            <option>
+                                Barbecue
+                            </option>
+                        </select>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2" for="">
+                        Room
+                    </label>
+                    <div class="col-sm-4">
+                        <select class="form-control">
+                            <option>
+                                Mustard
+                            </option>
+                            <option>
+                                Ketchup
+                            </option>
+                            <option>
+                                Barbecue
+                            </option>
+                        </select>
+                    </div>
+                    <label class="col-sm-3" for="">
+                        Date and hour
+                    </label>
+                    <div class="col-sm-3">
+                        <div class="input-group ui-datepicker">
+                            <input class="form-control" close-text="Close" date-disabled="disabled(date, mode)" datepicker-options="dateOptions" datepicker-popup="{{format}}" is-open="opened" max="'2015-06-22'" min="minDate" ng-model="dt" ng-required="true" type="text">
+                            <span class="input-group-addon">
+                            <i class="fa fa-calendar">
+                            </i>
+                            </span>
+                            </input>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-right">
+                <button class="btn btn-primary" ng-click="cancel()">
+                Dimiss
+                </button>
+                <button class="btn btn-warning" ng-click="ok()">
+                Save
+                </button>
+                </p>
+            </footer>
+        </section>
+    </div>
+    <a class="btn btn-primary" href="javascript:;" ng-click="open()">
+        <span>
+        Add spending
+        </span>
+    </a>
+    </br>
+</div>

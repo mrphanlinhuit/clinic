@@ -1,0 +1,279 @@
+<div class="page page-general page-patient" ng-controller="DiagnosticCtrl">
+    <div class="panel panel-default table-dynamic">
+        <div class="panel-body">
+            <h4 class="text-center">
+                {{ diagnostic.patient_name ? diagnostic.patient_name : "" }}
+            </h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="nav nav-boxed nav-justified">
+                <li>
+                    <a ng-href="{{ (diagnostic.user_id) ? '#/patient/' + diagnostic.user_id : '#/patient/new' }}"><i class="color-success fa fa-user"></i>Personal data</a>
+                </li>
+                <li class="open">
+                    <a ng-href="{{ (diagnostic.user_id) ? '#/patient/diagnostics/' + diagnostic.user_id : '' }}"><i class="color-warning fa fa-search"></i>Diagnostics</a>
+                </li>
+                <li>
+                    <a ng-href="{{ (diagnostic.user_id) ? '#/patient/appointments/' + diagnostic.user_id : '' }}"><i class="color-danger fa fa-building"></i>Appointments</a>
+                </li>
+                <li>
+                    <a ng-href="{{ (diagnostic.user_id) ? '#/patient/bonds/' + diagnostic.user_id : '' }}"><i class="color-info fa fa-ticket"></i>Bonds</a>
+                </li>
+                <li>
+                    <a ng-href="{{ (diagnostic.user_id) ? '#/patient/invoices/' + diagnostic.user_id : '' }}"><i class="color-gray fa fa-file-text-o"></i>Invoices</a>
+                </li>
+                <li>
+                    <a ng-href="{{ (diagnostic.user_id) ? '#/patient/timeline/' + diagnostic.user_id : '' }}"><i class="color-info-alt fa fa-clock-o"></i>Timeline</a>
+                </li>
+                <li>
+                    <a ng-href="{{ (diagnostic.user_id) ? '#/patient/cash/' + diagnostic.user_id : '' }}"><i class="color-primary fa fa-eur"></i>Cash</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <section class="panel panel-default">
+        <div class="panel-heading">
+            <strong><span class="fa fa-medkit"></span> Diagnostic</strong>
+        </div>
+        <div class="panel-body">
+            <form class="form-horizontal" name="form" ng-submit="submit()" novalidate role="form">
+                <div class="col-md-12">
+                    <div class="form-group" ng-class="{'has-error': form.$dirty && form.name.$invalid}">
+                        <label class="col-sm-2 control-label" for="name">Title</label>
+                        <div class="col-sm-10" ng-class="{'has-error': form.$dirty && form.name.$invalid}">
+                            <input class="form-control input-sm" id="name" name="name" ng-model="diagnostic.name" placeholder="" required type="text"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="pathology_id">Pathology</label>
+                        <div class="col-sm-4">
+                            <select class="form-control" id="pathology_id" name="pathology_id" ng-model="diagnostic.pathology_id" ng-options="obj.id as obj.name for obj in pathologies">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                        <label class="col-sm-2 control-label" for="referer_id">Referer</label>
+                        <div class="col-sm-4">
+                            <select class="form-control" id="referer_id" name="referer_id" ng-model="diagnostic.referer_id" ng-options="obj.id as obj.name for obj in referers">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{'has-error': form.$dirty && form.author_id.$invalid}">
+                        <label class="col-sm-2 control-label" for="author_id">Responsible Doctor</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="author_id" name="author_id" ng-model="diagnostic.author_id" ng-options="obj.id as (obj.first_name + ' ' + obj.last_name) for obj in doctors" required>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="background">Background</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" id="background" name="background" ng-model="diagnostic.background" rows="4">
+                            </textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="anamnesis">Anamnesis</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" id="anamnesis" name="anamnesis" ng-model="diagnostic.anamnesis" rows="4">
+                            </textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="">Tags</label>
+                        <div class="col-sm-10">
+                            <tags-input class="ui-tags-input" display-property="name" ng-model="diagnostic.tags">
+                            </tags-input>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <p class="text-right">
+                        <button class="btn" ng-click="dismiss()" type="button">Revert</button>
+                        <button class="btn btn-success" type="submit">Save</button>
+                    </p>
+                </div>
+                <p>
+                    Created {{diagnostic.created_at | mydatetime}} by {{diagnostic.created_by_name}}. Last modified  {{diagnostic.updated_at | mydatetime}} by {{diagnostic.updated_by_name}}.
+                </p>
+            </form>
+        </div>
+    </section>
+    <div class="panel panel-default table-dynamic" ng-repeat="item in showlist">
+        <div class="panel-heading" ng-show="!item.treatment">
+            <strong><span class="fa fa-medkit"></span> Review ({{item.created_at}})</strong>
+            <span class="pull-right"><a class="btn-icon btn-xs bg-info" href="javascript:;" ng-click="addReview(item.id)"><i class="fa fa-pencil"></i></a> <a class="btn-icon btn-xs bg-danger" href="javascript:;" ng-click="deleteReview($index)"><i class="fa fa-trash"></i></a></span>
+        </div>
+        <div class="panel-heading" ng-show="item.treatment">
+            <strong><span class="fa fa-medkit"></span> Prescription ({{item.created_at | mydate}})</strong>
+            <span class="pull-right"><a class="btn-icon btn-xs bg-info" href="javascript:;" ng-click="addPrescription(item.id)"><i class="fa fa-pencil"></i></a> <a class="btn-icon btn-xs bg-danger" href="javascript:;" ng-click="deletePrescription($index)"><i class="fa fa-trash"></i></a></span>
+        </div>
+        <div class="panel-body" ng-show="!item.treatment">
+            <p ng-bind="item.description">
+            </p>
+            <p>
+                Created {{item.created_at | mydatetime}} by {{item.created_by_name}}. Last modified  {{item.updated_at | mydatetime}} by {{item.updated_by_name}}.
+            </p>
+        </div>
+        <div class="panel-body" ng-show="item.treatment">
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <strong>Treatment</strong>
+                    </div>
+                    <div class="form-group">
+                        {{item.treatment}}
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <i class="fa fa-chevron-circle-right fa-4x color-warning"></i>
+                                </div>
+                                <div class="col-xs-6">
+                                    <h1>
+                                        {{item.sessions}}
+                                    </h1>
+                                </div>
+                                <div class="col-xs-12 text-center">
+                                    Sessions Prescribed
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <i class="fa fa fa-table fa-4x color-info"></i>
+                                </div>
+                                <div class="col-xs-6">
+                                    <h1>
+                                        {{item.scheduled}}
+                                    </h1>
+                                </div>
+                                <div class="col-xs-12 text-center">
+                                    Sessions Scheduled
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <i class="fa fa-check-circle fa-4x color-success"></i>
+                                </div>
+                                <div class="col-xs-6">
+                                    <h1>
+                                        {{item.received}}
+                                    </h1>
+                                </div>
+                                <div class="col-xs-12 text-center">
+                                    Sessions Received
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="notes">Note</label>
+                <p ng-bind="item.notes">
+                </p>
+            </div>
+            <p>
+                Created {{item.created_at | mydatetime}} by {{item.created_by_name}}. Last modified  {{item.updated_at | mydatetime}} by {{item.updated_by_name}}.
+            </p>
+        </div>
+    </div>
+    <section>
+        <div class="row">
+            <div class="col-md-12">
+                <p class="text-right">
+                    <a class="btn btn-danger" href="javascript:;" ng-click="closediagnostic(diagnostic.id)"><i class="fa fa-close"></i> Close diagnostic</a>
+                    <a class="btn btn-info" href="javascript:;" ng-click="addReview()"><i class="fa fa-plus"></i> Add Review</a>
+                    <a class="btn btn-primary" href="javascript:;" ng-click="addPrescription()"><i class="fa fa-plus"></i> Add Prescription</a>
+                </p>
+            </div>
+        </div>
+    </section>
+    <div class="panel panel-default" ng-hide="user.register">
+        <div class="panel-heading">
+            <strong><span class="fa fa-paperclip"></span> Attachments</strong>
+        </div>
+        <div class="panel-body" ng-controller="AttachmentDiagnosticCtrl">
+            <table class="table table-bordered table-striped table-responsive">
+                <thead>
+                    <tr>
+                        <th>
+                            <div class="th" ng-class="{'sort-active': sort === 'original_filename', 'sort-asc': order === 'asc', 'sort-desc': order === 'desc'}" ng-click="sortBy('original_filename')">
+                                Filename
+                                <span class="sort-action pull-right"><i class="fa fa-lg fa-caret-down"></i><i class="fa fa-lg fa-caret-up"></i></span>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="th" ng-class="{'sort-active': sort === 'description', 'sort-asc': order === 'asc', 'sort-desc': order === 'desc'}" ng-click="sortBy('description')">
+                                Description
+                                <span class="sort-action pull-right"><i class="fa fa-lg fa-caret-down"></i><i class="fa fa-lg fa-caret-up"></i></span>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="th" ng-class="{'sort-active': sort === 'created_at', 'sort-asc': order === 'asc', 'sort-desc': order === 'desc'}" ng-click="sortBy('created_at')">
+                                Date added
+                                <span class="sort-action pull-right"><i class="fa fa-lg fa-caret-down"></i><i class="fa fa-lg fa-caret-up"></i></span>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="th">
+                                Action
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="file in results.data">
+                        <td ng-bind="file.original_filename">
+                        </td>
+                        <td ng-bind="file.description">
+                        </td>
+                        <td ng-bind="file.created_at">
+                        </td>
+                        <td class="text-center">
+                            <a class="btn-icon btn-icon-sm bg-success" ng-href="{{file.filepath}}" target="_blank"><i class="fa fa-download"></i></a>
+                            <a class="btn-icon btn-icon-sm bg-info" href="javascript:;" ng-click="edit(file.id)"><i class="fa fa-pencil"></i></a>
+                            <a class="btn-icon btn-icon-sm bg-danger" href="javascript:;" ng-click="delete(file.hash)"><i class="fa fa-trash"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="row">
+                <div class="col-sm-12" ng-show="showprogress">
+                    <progressbar class="progressbar-sm progress-striped active" value="progress">
+                        <span>{{progress}}%</span>
+                    </progressbar>
+                </div>
+                <div class="col-sm-12">
+                    <input class="form-control" id="attachments" multiple name="attachments" ng-file-select type="file" upload-button upload-button-class="btn btn-default" upload-button-text="Upload Attachments"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12" ng-file-drop>
+                    <div ng-show="uploader.isHTML5">
+                        <div class="drop-box" ng-file-over>
+                            Drag and drop files here
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

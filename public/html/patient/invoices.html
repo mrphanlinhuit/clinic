@@ -1,0 +1,263 @@
+<div class="page page-general page-patient" ng-controller="PatientInvoicesCtrl">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <h4 class="text-center">
+                {{ user.id ? user.meta.first_name + " " + user.meta.last_name : "" }}
+            </h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="nav nav-boxed nav-justified">
+                <li>
+                    <a ng-href="{{ (user.id) ? '#/patient/' + user.id : '#/patient/new' }}"><i class="color-success fa fa-user"></i> Personal data</a>
+                </li>
+                <li>
+                    <a ng-href="{{ (user.id) ? '#/patient/diagnostics/' + user.id : '' }}"><i class="color-warning fa fa-search"></i> Diagnostics</a>
+                </li>
+                <li>
+                    <a ng-href="{{ (user.id) ? '#/patient/appointments/' + user.id : '' }}"><i class="color-danger fa fa-building"></i> Appointments</a>
+                </li>
+                <li>
+                    <a ng-href="{{ (user.id) ? '#/patient/bonds/' + user.id : '' }}"><i class="color-info fa fa-ticket"></i> Bonds</a>
+                </li>
+                <li class="open">
+                    <a ng-href="{{ (user.id) ? '#/patient/invoices/' + user.id : '' }}"><i class="color-gray fa fa-file-text-o"></i> Invoices</a>
+                </li>
+                <li>
+                    <a ng-href="{{ (user.id) ? '#/patient/timeline/' + user.id : '' }}"><i class="color-info-alt fa fa-clock-o"></i> Timeline</a>
+                </li>
+                <li>
+                    <a ng-href="{{ (user.id) ? '#/patient/cash/' + user.id : '' }}"><i class="color-primary fa fa-eur"></i> Cash</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <section class="panel panel-default">
+        <div class="panel-heading">
+            <strong><span class="fa fa-th"></span> Invoices</strong>
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive table-dynamic">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                <div class="th" ng-class="{'sort-active': sort === 'created_at', 'sort-asc': order === 'asc', 'sort-desc': order === 'desc'}" ng-click="sortBy('created_at')">
+                                    Invoice Date
+                                    <span class="sort-action pull-right"><i class="fa fa-lg fa-caret-down"></i><i class="fa fa-lg fa-caret-up"></i></span>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th" ng-class="{'sort-active': sort === 'id', 'sort-asc': order === 'asc', 'sort-desc': order === 'desc'}" ng-click="sortBy('id')">
+                                    Invoice Number
+                                    <span class="sort-action pull-right"><i class="fa fa-lg fa-caret-down"></i><i class="fa fa-lg fa-caret-up"></i></span>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th" ng-class="{'sort-active': sort === 'invoice_by', 'sort-asc': order === 'asc', 'sort-desc': order === 'desc'}" ng-click="sortBy('invoice_by')">
+                                    Invoice by
+                                    <span class="sort-action pull-right"><i class="fa fa-lg fa-caret-down"></i><i class="fa fa-lg fa-caret-up"></i></span>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th" ng-class="{'sort-active': sort === 'amount', 'sort-asc': order === 'asc', 'sort-desc': order === 'desc'}" ng-click="sortBy('amount')">
+                                    Amount
+                                    <span class="sort-action pull-right"><i class="fa fa-lg fa-caret-down"></i><i class="fa fa-lg fa-caret-up"></i></span>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th">
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="invoice in invoices.data">
+                            <td ng-bind="invoice.created_at | mydate">
+                            </td>
+                            <td>
+                                <a href="javascript:;" ng-bind="invoice.id | invoice" ng-click="viewInvoice(invoice)"></a>
+                            </td>
+                            <td ng-bind="invoice.invoice_by">
+                            </td>
+                            <td ng-bind="invoice.amount">
+                            </td>
+                            <td class="text-center">
+                                <label class="ui-radio"><input name="amendmentinvoice" ng-click="choiceInvoice(invoice)" type="radio"/><span></span></label>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <footer class="table-footer">
+                    <div class="row">
+                        <div class="col-md-6 page-num-info">
+                            <p class="m-t inline">
+                                {{ invoices.from }}-{{ invoices.to }} of {{ invoices.total }} items
+                                <select ng-change="changeLimit(invoices.per_page)" ng-model="invoices.per_page" ng-options="obj for obj in perpage">
+                                </select>
+                                per page
+                            </p>
+                        </div>
+                        <div class="col-md-6 text-right pagination-container">
+                            <pagination boundary-links="true" class="pagination-sm" items-per-page="invoices.per_page" ng-change="goTo(invoices.current_page)" ng-model="invoices.current_page" rotate="false" total-items="invoices.total">
+                            </pagination>
+                        </div>
+                    </div>
+                    <div class="divider">
+                    </div>
+                    <p class="text-right">
+                        <button class="btn btn-primary" ng-click="doAmendment()" type="button">Amendment Bills</button>
+                    </p>
+                </footer>
+            </div>
+        </div>
+    </section>
+    <section class="panel panel-default">
+        <div class="panel-heading">
+            <strong><span class="fa fa-th"></span> Amendment Bills</strong>
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive table-dynamic">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                <div class="th" ng-class="{'sort-active': sort === 'created_at', 'sort-asc': order === 'asc', 'sort-desc': order === 'desc'}" ng-click="sortBy('created_at')">
+                                    Invoice Date
+                                    <span class="sort-action pull-right"><i class="fa fa-lg fa-caret-down"></i><i class="fa fa-lg fa-caret-up"></i></span>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th" ng-class="{'sort-active': sort === 'id', 'sort-asc': order === 'asc', 'sort-desc': order === 'desc'}" ng-click="sortBy('id')">
+                                    Invoice Number
+                                    <span class="sort-action pull-right"><i class="fa fa-lg fa-caret-down"></i><i class="fa fa-lg fa-caret-up"></i></span>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th" ng-class="{'sort-active': sort === 'invoice_by', 'sort-asc': order === 'asc', 'sort-desc': order === 'desc'}" ng-click="sortBy('invoice_by')">
+                                    Invoice by
+                                    <span class="sort-action pull-right"><i class="fa fa-lg fa-caret-down"></i><i class="fa fa-lg fa-caret-up"></i></span>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th" ng-class="{'sort-active': sort === 'amount', 'sort-asc': order === 'asc', 'sort-desc': order === 'desc'}" ng-click="sortBy('amount')">
+                                    Amount
+                                    <span class="sort-action pull-right"><i class="fa fa-lg fa-caret-down"></i><i class="fa fa-lg fa-caret-up"></i></span>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th" ng-class="{'sort-active': sort === 'corrected', 'sort-asc': order === 'asc', 'sort-desc': order === 'desc'}" ng-click="sortBy('corrected')">
+                                    Corrected Invoice
+                                    <span class="sort-action pull-right"><i class="fa fa-lg fa-caret-down"></i><i class="fa fa-lg fa-caret-up"></i></span>
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="amendment in amendments.data">
+                            <td ng-bind="amendment.created_at | mydate">
+                            </td>
+                            <td>
+                                <a href="javascript:;" ng-bind="amendment.id | invoice" ng-click="viewInvoice(amendment)"></a>
+                            </td>
+                            <td ng-bind="amendment.invoice_by">
+                            </td>
+                            <td ng-bind="amendment.amount">
+                            </td>
+                            <td class="text-center" ng-bind="amendment.corrected | invoice">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <footer class="table-footer">
+                    <div class="row">
+                        <div class="col-md-6 page-num-info">
+                            <p class="m-t inline">
+                                {{ amendments.from }}-{{ amendments.to }} of {{ amendments.total }} items
+                                <select ng-change="changeLimit(amendments.per_page)" ng-model="amendments.per_page" ng-options="obj for obj in perpage">
+                                </select>
+                                per page
+                            </p>
+                        </div>
+                        <div class="col-md-6 text-right pagination-container">
+                            <pagination boundary-links="true" class="pagination-sm" items-per-page="amendments.per_page" ng-change="goTo(amendments.current_page)" ng-model="amendments.current_page" rotate="false" total-items="amendments.total">
+                            </pagination>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </section>
+    <section class="panel panel-default">
+        <div class="panel-heading">
+            <strong><span class="fa fa-th"></span> To be invoiced</strong>
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive table-dynamic">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                <div class="th" ng-class="{'sort-active': sort === 'created_at', 'sort-asc': order === 'asc', 'sort-desc': order === 'desc'}" ng-click="sortBy('created_at')">
+                                    Sell date
+                                    <span class="sort-action pull-right"><i class="fa fa-lg fa-caret-down"></i><i class="fa fa-lg fa-caret-up"></i></span>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th" ng-class="{'sort-active': sort === 'name', 'sort-asc': order === 'asc', 'sort-desc': order === 'desc'}" ng-click="sortBy('name')">
+                                    Title
+                                    <span class="sort-action pull-right"><i class="fa fa-lg fa-caret-down"></i><i class="fa fa-lg fa-caret-up"></i></span>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th" ng-class="{'sort-active': sort === 'price', 'sort-asc': order === 'asc', 'sort-desc': order === 'desc'}" ng-click="sortBy('price')">
+                                    Price
+                                    <span class="sort-action pull-right"><i class="fa fa-lg fa-caret-down"></i><i class="fa fa-lg fa-caret-up"></i></span>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th">
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="bond in bonds.data">
+                            <td ng-bind="bond.created_at | mydate">
+                            </td>
+                            <td ng-bind="bond.name">
+                            </td>
+                            <td ng-bind="bond.price">
+                            </td>
+                            <td class="text-center">
+                                <label class="ui-radio"><input name="sendinvoice" ng-click="choiceBond(bond)" type="radio"/><span></span></label>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <footer class="table-footer">
+                    <div class="row">
+                        <div class="col-md-6 page-num-info">
+                            <p class="m-t inline">
+                                {{ bonds.from }}-{{ bonds.to }} of {{ bonds.total }} items
+                                <select ng-change="changeLimit(bonds.per_page)" ng-model="bonds.per_page" ng-options="obj for obj in perpage">
+                                </select>
+                                per page
+                            </p>
+                        </div>
+                        <div class="col-md-6 text-right pagination-container">
+                            <pagination boundary-links="true" class="pagination-sm" items-per-page="bonds.per_page" ng-change="goTo(bonds.current_page)" ng-model="bonds.current_page" rotate="false" total-items="bonds.total">
+                            </pagination>
+                        </div>
+                    </div>
+                </footer>
+                <div class="divider">
+                </div>
+                <p class="text-right">
+                    <button class="btn btn-primary" ng-click="sendInvoice()" type="button">Invoice selected</button>
+                </p>
+            </div>
+        </div>
+    </section>
+</div>

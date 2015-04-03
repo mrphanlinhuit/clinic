@@ -1,0 +1,17 @@
+<div class="modal-header">
+    <button aria-hidden="true" class="close" data-dismiss="modal" ng-click="dismiss()" type="button">×</button>
+    <h4 class="modal-title">
+        From: {{message.name}}
+    </h4>
+</div>
+<div class="modal-body">
+    <h4>
+        Topic: {{message.topic}}
+    </h4>
+    <div class="well">
+        {{message.body}}
+    </div>
+</div>
+<div class="modal-footer">
+    Time: {{message.created_at}}
+</div>

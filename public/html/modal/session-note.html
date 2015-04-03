@@ -1,0 +1,18 @@
+<div class="modal-header">
+    <button aria-hidden="true" class="close" ng-click="dismiss()" type="button">×</button>
+    <h4 class="modal-title">
+        Session note
+    </h4>
+</div>
+<div class="modal-body">
+    <form class="form-horizontal" ng-submit="submit()" role="form">
+        <div class="form-group">
+            <textarea class="form-control" name="notes" ng-model="session.notes" rows="3">
+            </textarea>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-default" ng-click="dismiss()" type="button">Close</button>
+    <button class="btn btn-primary" ng-click="submit()" type="submit">Save changes</button>
+</div>

@@ -1,0 +1,59 @@
+<div class="table-responsive">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>
+                    <div class="th">
+                        Date
+                    </div>
+                </th>
+                <th>
+                    <div class="th">
+                        Schedule
+                    </div>
+                </th>
+                <th>
+                    <div class="th">
+                        Room
+                    </div>
+                </th>
+                <th>
+                    <div class="th">
+                        Notes
+                    </div>
+                </th>
+                <th>
+                    <div class="th">
+                        Received
+                    </div>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="session in sessions">
+                <td ng-bind="session.created_at | mydate">
+                </td>
+                <td ng-bind="session.scheduled_at | mydate">
+                </td>
+                <td ng-bind="session.room">
+                </td>
+                <td class="text-center">
+                    <a class="btn-icon btn-icon-sm bg-primary" href="javascript:;" ng-click="open(session.id)"><span class="fa fa-file-o"></span></a>
+                </td>
+                <td class="text-center">
+                    <a class="btn-icon btn-icon-sm bg-success" href="javascript:;" ng-if="session.status == '1'"><span class="fa fa-eye"></span></a>
+                    <a class="btn-icon btn-icon-sm bg-warning" href="javascript:;" ng-if="session.status == '-1'"><span class="fa fa-eye-slash"></span></a>
+                    <label class="ui-checkbox" ng-if="session.status == '0'"><input ng-click="toggleStatus(session.id)" type="checkbox"/><span></span></label>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <p>
+        Created {{prescription.created_at}} by {{prescription.created_by_name}}. Last modified {{prescription.updated_at}} by {{prescription.updated_by_name}}.
+    </p>
+    <p class="text-right">
+        <a class="btn btn-success" href="javascript:;" ng-click="received()"><i class="fa fa-check-circle"></i> Mark as received</a>
+        <a class="btn btn-warning" href="javascript:;" ng-click="missed()"><i class="fa fa-eye-slash"></i> Mask as missed</a>
+        <a class="btn btn-primary" href="javascript:;" ng-click="schedule()"><i class="fa fa-clock-o"></i> Schedule new session</a>
+    </p>
+</div>

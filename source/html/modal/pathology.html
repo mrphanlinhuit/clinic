@@ -1,0 +1,27 @@
+<div class="modal-header">
+    <button aria-hidden="true" class="close" data-dismiss="modal" ng-click="dismiss()" type="button">×</button>
+    <h4 class="modal-title">
+        {{ pathologie.name ? pathologie.name : "New Pathologies" }}
+    </h4>
+</div>
+<div class="modal-body">
+    <form class="form-horizontal" name="form" ng-submit="submit()" novalidate role="form">
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="name">Name</label>
+            <div class="col-sm-10">
+                <input class="form-control" id="pathologie" name="pathologie" ng-model="pathologie.name" placeholder="" required type="text"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="name">Prescription</label>
+            <div class="col-sm-10">
+                <textarea class="form-control" id="prescription" name="prescription" ng-model="pathologie.prescription" placeholder="" rows="4">
+                </textarea>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-default" ng-click="dismiss()">Dismiss</button>
+    <button class="btn btn-primary" ng-click="submit()" ng-disabled="form.$invalid" type="submit">Save</button>
+</div>

@@ -1,0 +1,33 @@
+<div class="page" ng-controller="MessageCtrl">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <strong><span class="fa fa-th"></span> Message: {{message_id.topic}}</strong>
+        </div>
+        <div class="panel-body">
+            <div>
+                From: {{message_id.name}},  {{message_id.created_at}}
+            </div>
+            <div class="well">
+                {{message_id.body}}
+            </div>
+            <div class="ui-tab-container">
+                <tabset class="ui-tab">
+                    <tab class="active" heading="Reply Message">
+                        <form class="form-horizontal" name="form" novalidate role="form">
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <textarea class="form-control" id="body" name="body" ng-model="message.body" placeholder="" rows="10">
+                                    </textarea>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="mail-actions">
+                            <button class="btn btn-sm btn-primary" ng-click="reply()" ng-disabled="form.$invalid" type="submit">Reply</button>
+                            <button class="btn btn-sm btn-default" ng-click="discard()" type="reset"> Discard</button>
+                        </div>
+                    </tab>
+                </tabset>
+            </div>
+        </div>
+    </div>
+</div>

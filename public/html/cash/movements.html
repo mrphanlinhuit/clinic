@@ -1,0 +1,135 @@
+<div class="page page-general" ng-controller="MovementsCtrl">
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="nav nav-boxed nav-justified">
+                <li class="open">
+                    <a href="#/cash/movements"><i class="color-success fa fa-eur"></i> Movements</a>
+                </li>
+                <li>
+                    <a href="#/cash/statistics"><i class="color-warning fa fa-bar-chart-o"></i> Statistics</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <section class="panel panel-default">
+        <div class="panel-heading">
+            <strong><span class="fa fa-calendar"></span> Movements</strong>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <!-- <div class="input-group">
+                        <input class="form-control" max="" min="minDate" ng-change="dateFilter()" ng-model="date" type="date"/>
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div> -->
+                    <div class="input-group ui-datepicker" ng-click="open($event)">
+                        <input class="form-control" close-text="Close" datepicker-options="dateOptions" datepicker-popup="dd/MM/yyyy" is-open="opened" ng-change="dateFilter()" ng-model="date" ng-required="true" type="text"/>
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    Card this day:
+                    <span class="h3" ng-bind="results.data | sumby: 'card'"></span>
+                </div>
+                <div class="col-md-3">
+                    Money this day:
+                    <span class="h3" ng-bind="results.data | sumby: 'money'"></span>
+                </div>
+                <div class="col-md-3">
+                    Total this day:
+                    <span class="h3" ng-bind="results.data | sumby"></span>
+                </div>
+            </div>
+            <div class="divider">
+            </div>
+            <div class="table-responsive table-dynamic">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>
+                                <div class="th" ng-class="{'sort-active': sort === 'invoice_by', 'sort-asc': order === 'asc', 'sort-desc': order === 'desc'}" ng-click="sortBy('invoice_by')">
+                                    Author
+                                    <span class="sort-action pull-right"><i class="fa fa-lg fa-caret-down"></i><i class="fa fa-lg fa-caret-up"></i></span>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th" ng-class="{'sort-active': sort === 'title', 'sort-asc': order === 'asc', 'sort-desc': order === 'desc'}" ng-click="sortBy('title')">
+                                    Title
+                                    <span class="sort-action pull-right"><i class="fa fa-lg fa-caret-down"></i><i class="fa fa-lg fa-caret-up"></i></span>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th" ng-class="{'sort-active': sort === 'created_at', 'sort-asc': order === 'asc', 'sort-desc': order === 'desc'}" ng-click="sortBy('created_at')">
+                                    Date
+                                    <span class="sort-action pull-right"><i class="fa fa-lg fa-caret-down"></i><i class="fa fa-lg fa-caret-up"></i></span>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th" ng-class="{'sort-active': sort === 'amount', 'sort-asc': order === 'asc', 'sort-desc': order === 'desc'}" ng-click="sortBy('amount')">
+                                    Amount
+                                    <span class="sort-action pull-right"><i class="fa fa-lg fa-caret-down"></i><i class="fa fa-lg fa-caret-up"></i></span>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th" ng-class="{'sort-active': sort === 'invoice', 'sort-asc': order === 'asc', 'sort-desc': order === 'desc'}" ng-click="sortBy('invoice')">
+                                    Invoice
+                                    <span class="sort-action pull-right"><i class="fa fa-lg fa-caret-down"></i><i class="fa fa-lg fa-caret-up"></i></span>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th" ng-class="{'sort-active': sort === 'payment_type', 'sort-asc': order === 'asc', 'sort-desc': order === 'desc'}" ng-click="sortBy('payment_type')">
+                                    Type
+                                    <span class="sort-action pull-right"><i class="fa fa-lg fa-caret-down"></i><i class="fa fa-lg fa-caret-up"></i></span>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th">
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in results.data">
+                            <td ng-bind="item.invoice_by">
+                            </td>
+                            <td ng-bind="item.title">
+                            </td>
+                            <td ng-bind="item.created_at | mydate">
+                            </td>
+                            <td ng-bind="item.amount">
+                            </td>
+                            <td>
+                                <a href="javascript:;" ng-bind="item.invoice | invoice" ng-click="viewInvoice(item)"></a>
+                            </td>
+                            <td ng-bind="item.payment_type | capitalize">
+                            </td>
+                            <td class="text-center">
+                                <label class="ui-radio"><input name="movements" ng-click="choiceMovements(item)" type="radio"/><span></span></label>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <footer class="table-footer">
+                    <div class="row">
+                        <div class="col-md-6 page-num-info">
+                            <p class="m-t inline">
+                                {{ results.from }}-{{ results.to }} of {{ results.total }} items
+                                <select ng-change="changeLimit(results.per_page)" ng-model="results.per_page" ng-options="obj for obj in perpage">
+                                </select>
+                                per page
+                            </p>
+                        </div>
+                        <div class="col-md-6 text-right pagination-container">
+                            <pagination boundary-links="true" class="pagination-sm" items-per-page="results.per_page" ng-change="goTo(results.current_page)" ng-model="results.current_page" rotate="false" total-items="results.total">
+                            </pagination>
+                        </div>
+                    </div>
+                </footer>
+                <p class="text-right">
+                    <a class="btn btn-warning" href="javascript:;" ng-click="devolution()"><span>Devolution</span></a>
+                    <a class="btn btn-primary" href="javascript:;" ng-click="spending()"><span>Add spending</span></a>
+                </p>
+            </div>
+        </div>
+    </section>
+</div>

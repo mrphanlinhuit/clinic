@@ -1,0 +1,129 @@
+<div class="modal-header">
+    <button aria-hidden="true" class="close" data-dismiss="modal" ng-click="dismiss()" type="button">×</button>
+    <h4 class="modal-title">
+        {{invoice.number}}
+    </h4>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <form class="form-horizontal" name="form" novalidate>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" for=""> Date</label>
+                    <div class="col-sm-9">
+                        <input class="form-control input-sm" disabled="disabled" id="date" name="date" value="{{ invoice.created_at | mydate }}" placeholder="dd/mm/yyyy" type="text"/>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <section class="panel panel-default">
+                    <div class="panel-heading">
+                        <strong><span class="fa fa-th"></span> Name</strong>
+                    </div>
+                    <div class="panel-body">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <input class="form-control input-sm" disabled="disabled" id="name" name="name" ng-model="invoice.name" placeholder="Name" type="text"/>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control input-sm" disabled="disabled" id="address" name="address" ng-model="invoice.address" placeholder="Address" type="text"/>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control input-sm" disabled="disabled" id="fiscalcode" name="fiscalcode" ng-model="invoice.fiscalcode" placeholder="Fiscal code" type="text"/>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </form>
+    </div>
+    <h3 ng-show="!item.corrected">
+        Items
+    </h3>
+    <h3 ng-show="item.corrected">
+        Corrected Invoice: {{item.corrected}}
+    </h3>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        <div class="th">
+                            Title
+                        </div>
+                    </th>
+                    <th>
+                        <div class="th">
+                            Tax Rate
+                        </div>
+                    </th>
+                    <th>
+                        <div class="th">
+                            Price without taxes
+                        </div>
+                    </th>
+                    <th>
+                        <div class="th">
+                            Total Price
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td ng-bind="invoice.title">
+                    </td>
+                    <td>
+                        {{invoice.taxes | percent}}
+                    </td>
+                    <td ng-bind="invoice.amount">
+                    </td>
+                    <td ng-bind="invoice.amount | totalvat: invoice.taxes | number: 2">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="row text-small">
+            <div class="col-md-4">
+                <button class="btn btn-success" type="button">Download PDF</button>
+            </div>
+            <div class="col-sm-offset-0 col-sm-8">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                <div class="th">
+                                    Total without taxes
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th">
+                                    Taxes
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th">
+                                    Total
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td ng-bind="invoice.amount">
+                            </td>
+                            <td>
+                                {{invoice.taxes | percent}}
+                            </td>
+                            <td ng-bind="invoice.amount | totalvat: invoice.taxes | number: 2">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-default" ng-click="dismiss()" type="button">Close</button>
+</div>

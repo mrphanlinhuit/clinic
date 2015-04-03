@@ -1,0 +1,93 @@
+ --  bondtypes: Don't know why do you have provider_id 
+ -- 1.- A bond for 10 sessions only valid during 60 days. This means that when the bond is purchased the customer has 60 days to use the bond and after 60 days the bond can't be used.
+ -- 2.- A bond for 10 sessions that can be used during the year after it has been purchased.
+ -- 3.- A bond for 5 sessions that can be used during the current month. It cannot be purchased anymore because it is not enabled.
+INSERT INTO 'bondtype' (name, tax, price, session, timetouse, status) VALUES ('10 sessions Christmas Bond', 21, 100, 10, 60, 1);
+INSERT INTO 'bondtype' (name, tax, price, session, timetouse, status) VALUES ('10 sessions Bond', 21, 130, 10, 365, 1);
+INSERT INTO 'bondtype' (name, tax, price, session, timetouse, status) VALUES ('10 sessions Summer Bond', 21, 50, 5, 30, 0);
+
+ 
+ -- clinic: don't know why do you have user_id. This is not a user. I think you have used this relationship to avoid putting name, and photo twice, please keep  the database structure clean.  This will only have a row with the clinic data.
+// ApiUsersController.php line 407 : Only one, Default account ID = 1 is Admin, same Clinic 
+INSERT INTO clinic (openhour1, openhour2, closehour1, closehour2, vat_id) VALUES ('08:00', '14:00', '16:00', '20:00', 'B123124192');
+
+
+-- providers: You are missing the provider table. A running clinic will have a list of providers. Providers are the one that send invoices to the clinic. It should be something like that:
+CREATE TABLE IF NOT EXISTS `providers` (
+`id` int(10) unsigned NOT NULL,
+  `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `address` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `fax` varchar(16) COLLATE utf8_unicode_ci NOT NULL,
+  `phone` varchar(16) COLLATE utf8_unicode_ci NOT NULL,
+  `mobile` varchar(16) COLLATE utf8_unicode_ci NOT NULL,
+  `vat-id` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `city` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `province` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `postal` varchar(16) COLLATE utf8_unicode_ci NOT NULL,
+  `country` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `note` text COLLATE utf8_unicode_ci NOT NULL,
+  `created_by` int(10) unsigned NOT NULL,
+  `updated_by` int(10) unsigned NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+INSERT INTO providers (name, note) VALUES ('Bee Sight Soft', 'The best company in the world');
+INSERT INTO providers (name, note) VALUES ('Electricity company', 'They provide electricity!');
+INSERT INTO providers (name, note) VALUES ('Water company', 'They provide water!');
+
+-- invoices_received: When you have the providers table, we need to save the information for each invoice that the provider sent, this would be something like that
+CREATE TABLE IF NOT EXISTS `invoices_provider` (
+`id` int(10) unsigned NOT NULL,
+  `provider_id` int(10) unsigned NOT NULL,
+  `attachment_id` int(10) unsigned NOT NULL, -- we need also attachments here, an invoice will be basically a file and some more data.
+  `number` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `description` varchar(255) COLLATE utf8_unicode_ci NOT NULL, -- It seems that we will need a basic description
+  `date` timestamp NOT NULL,
+  `taxes` float(10), -- The % of taxes
+  `amount` float(10), -- The price to pay
+  `created_by` int(10) unsigned NOT NULL,
+  `updated_by` int(10) unsigned NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+INSERT INTO 'invoices_provider' ('provider_id', 'number', description, date, taxes, amount) VALUES (1, '1238109841', 'First milestone', '01/01/2014', 0, 500);
+INSERT INTO 'invoices_provider' ('provider_id', 'number', description, date, taxes, amount) VALUES (2, 'F212FaA34f', 'January 2014 water', '01/01/2014', 0, 20);
+INSERT INTO 'invoices_provider' ('provider_id', 'number', description, date, taxes, amount) VALUES (3, 'El-64361241', 'January 2014 electrical power', '01/01/2014', 0, 50);
+
+--begin
+
+The invoices_sent are a bit difficult to explain, I will try to explain you with the expected workflow:
+
+1.- A patient call to the clinic for the first time, and a new phone meeting is created with a treatment of "First Visit" so a doctor see the patient. If the patient does not exist it is created with a new temp diagnostic (see dashboard mockup). If the patient exists, it may call because he want a "Second visit" for an ongoing diagnostic or because he returns after two years for example, and then a new temp diagnostic is added to the existing patient with the treatment "First Visit". 
+
+2.- The doctor receives the patient the day scheduled and he modifies the temp diagnostic and prescribe a number of sessions of some treatment.  
+
+3.- The doctor marks the appointment as received.
+
+4.- The patient goes out of the doctor room to see the cashier to pay the visit. Every treatment has a price, so the patient should pay the price to the cashier. The patients can pay using a credit card, with money or with a bond. If the treatment is given by a doctor only money and credit card are allowed. Bonds can only be used with treatments given by therapists.
+
+5.- The patient pays the "First visit" or "Second Visit" to the cashier, so the cashier goes to the "patient-cash.bmml" screen where he will see that the patient has scheduled and received treatments that have not been pay. The cashier select the item that the patient will pay and select if the pay will be with money or with credit card. 
+
+6.- If the doctor has prescribed, for example, 10 sessions of a treatment given by a therapist, the patient may want to buy a bond. So the patient gives a credit card to the cashier, and the cashier adds a new bond to the patient in the 'bonds.mmml' screen. 
+
+7.- The cashier then go to the "patient-cash.bmml" screen where should appear the "10 session bond" bought by the patient. The cashier mark the line as paid by credit card.
+
+8.- The cashier will also  talk  with the patient to schedule the sessions prescribed by the doctor.
+
+9.- When the patient comes back for a prescribed and scheduled session, he goes to the assigned room and a therapist gives the treatment.
+
+10.- The therapist mark the session as received.
+
+11.- The patient goes to the cashier and pay with his bond. The bond now has only 9 sessions remaining.
+
+12.- If a patient wants an invoice, in the sent patient-invoices.bmml screen we will have the things that the patient has pay, that is: the bond and the "first visit" treatment. Here you can select the item you want to invoice and push "invoice selected" to create the new invoice: a modal screen should appear to input the "customer name", "customer address" and "fiscalcode".
+
+13.- At the end of the month we may have a lot of cash received that is not invoiced, then we need to "mass invoice",  going to the "accounting.bmml" screen and selecting all the things to be invoiced. This will create a new invoice for each item using the patient "national id" as "vat ID". Invoices must have an invoice number that will be unique for each invoice and consecutive (without gaps).
+
+
+14.- Maybe a patient wants his money to be refund. Then the cashier go to the "patient-cash" screen and "makes a devolution". If the money was also invoiced, we need to create an "amendment bill", that is, a negative invoice, that has a different numbering.
+
+--end
+
+-- invoices_amendment

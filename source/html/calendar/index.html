@@ -1,0 +1,89 @@
+<div class="page page-general" ng-controller="CalendarsCtrl">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <strong><span class="fa fa-calendar"></span> Calendar</strong>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-3">
+                    <form action="" method="POST" role="form">
+                        <legend>
+                            <i class="fa fa-filter"></i>
+                            Filter
+                        </legend>
+                        <div class="form-group">
+                            <label for="room">Room</label>
+                            <select class="form-control" id="room" name="room" ng-change="goTo({room_id:room})" ng-model="room" ng-options="obj.id as obj.name for obj in rooms">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Employee</label>
+                            <select class="form-control" id="employee" name="employee" ng-change="goTo({user_id:employee})" ng-model="employee" ng-options="obj.id as (obj.first_name + ' ' + obj.last_name) for obj in employees">
+                                <option value=""></option>
+                            </select>
+                            <span class="icon fa fa-refresh fa-spin" ng-show="loadingState"></span>
+                        </div>
+                    </form>
+                    <button class="btn btn-success btn-direction btn-right" ng-click="new()" type="button">New Session</button>
+                </div>
+                <div class="col-sm-9">
+                    <div class="pull-left">
+                        <button class="btn btn-xs btn-info btn-direction btn-up" ng-click="isCollapsed = !isCollapsed"><i class="fa fa-bell-o fa-lg"></i> Open Hours</button>
+                        <div collapse="isCollapsed" >
+                            <small>Morning: <b class="openhour">{{clinic.openhour1}}</b> - <b class="closehour">{{clinic.closehour1}}</b></small> 
+                            <small> / Afternoon: <b class="openhour">{{clinic.openhour2}}</b> - <b class="closehour">{{clinic.closehour2}}</b></small>
+                        </div>
+                    </div>
+                    <div class="pull-right">
+                        <div class="btn-group btn-xs">
+                            <button class="btn btn-sm btn-info" ng-click="changeView('agendaDay', myCalendar)">Day</button>
+                            <button class="btn btn-sm btn-success" ng-click="changeView('agendaWeek', myCalendar)">Week</button>
+                            <button class="btn btn-sm btn-warning" ng-click="changeView('month', myCalendar)">Month</button>
+                        </div>
+                        <button class="btn btn-sm btn-danger" ng-click="today(myCalendar)" type="button">today</button>
+                    </div>
+                    <div calendar="myCalendar" class="calendar" config="uiConfig.calendar" ng-model="eventSources" ui-calendar="uiConfig.calendar">
+                    </div>
+                </div>
+                <div class="fc-overlay">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <strong><i class="fa fa-user fa-lg"></i> {{event.patient}}</strong>
+                        </div>
+                        <div class="panel-body">
+                            <div>
+                                <i class="fa fa-phone fa-lg"></i>
+                                {{event.phone}}
+                            </div>
+                            <div>
+                                <i class="fa fa-clock-o fa-lg"></i>
+                                {{event.start | date:'medium'}}
+                            </div>
+                            <div class="ng-hide" ng-show="event.end">
+                                <i class="fa fa-clock-o fa-lg"></i>
+                                {{event.end | date:'medium'}}
+                            </div>
+                            <div>
+                                <i class="fa fa-map-marker fa-lg"></i>
+                                {{event.location}}
+                            </div>
+                            <div>
+                                <i class="fa fa-h-square fa-lg"></i>
+                                Diagnostic: {{event.diagnostic}} {{event.notes}}
+                            </div>
+                            <div>
+                                <i class="fa fa-stethoscope fa-lg"></i>
+                                {{event.treatment}}
+                            </div>
+                            <div>
+                                <i class="fa fa-user-md fa-lg"></i>
+                                {{event.author}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

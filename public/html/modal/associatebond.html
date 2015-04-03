@@ -1,0 +1,94 @@
+<div class="modal-header">
+    <button aria-hidden="true" class="close" data-dismiss="modal" ng-click="dismiss()" type="button">×</button>
+    <h4 class="modal-title">
+        Associate with bond
+    </h4>
+</div>
+<div class="modal-body">
+    <form class="form-horizontal" name="form" ng-submit="submit()" novalidate role="form">
+        <h3>
+            Associate
+        </h3>
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped ">
+                <thead>
+                    <tr>
+                        <th>
+                            <div class="th" ng-class="{'sort-active': sort === 'created_at', 'sort-asc': order === 'asc', 'sort-desc': order === 'desc'}" ng-click="sortBy('created_at')">
+                                Session date
+                                <span class="sort-action pull-right"><i class="fa fa-lg fa-caret-down"></i><i class="fa fa-lg fa-caret-up"></i></span>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="th" ng-class="{'sort-active': sort === 'treatment', 'sort-asc': order === 'asc', 'sort-desc': order === 'desc'}" ng-click="sortBy('treatment')">
+                                Treatment
+                                <span class="sort-action pull-right"><i class="fa fa-lg fa-caret-down"></i><i class="fa fa-lg fa-caret-up"></i></span>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="th">
+                                Action
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="session in results.data">
+                        <td ng-bind="session.name">
+                        </td>
+                        <td ng-bind="session.treatment">
+                        </td>
+                        <td class="text-center">
+                            <a class="btn-icon btn-icon-sm bg-danger" href="javascript:;" ng-click="delete(session.id)"><i class="fa fa-trash"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <h3>
+            To be paid
+        </h3>
+        <div class="divider">
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped ">
+                <thead>
+                    <tr>
+                        <th>
+                            <div class="th" ng-class="{'sort-active': sort === 'created_at', 'sort-asc': order === 'asc', 'sort-desc': order === 'desc'}" ng-click="sortBy('created_at')">
+                                Session date
+                                <span class="sort-action pull-right"><i class="fa fa-lg fa-caret-down"></i><i class="fa fa-lg fa-caret-up"></i></span>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="th" ng-class="{'sort-active': sort === 'treatment', 'sort-asc': order === 'asc', 'sort-desc': order === 'desc'}" ng-click="sortBy('treatment')">
+                                Treatment
+                                <span class="sort-action pull-right"><i class="fa fa-lg fa-caret-down"></i><i class="fa fa-lg fa-caret-up"></i></span>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="th">
+                                Action
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="session in results.data">
+                        <td ng-bind="session.name">
+                        </td>
+                        <td ng-bind="session.treatment">
+                        </td>
+                        <td class="text-center">
+                            <a class="btn-icon btn-icon-sm bg-danger" href="javascript:;" ng-click="delete(session.id)"><i class="fa fa-trash"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-default" ng-click="dismiss()">Dismiss</button>
+    <button class="btn btn-primary" ng-click="submit()" ng-disabled="form.$invalid" type="submit">Associate with bond</button>
+</div>

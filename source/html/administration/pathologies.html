@@ -1,0 +1,96 @@
+<div class="page page-table table-dynamic">
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="nav nav-boxed nav-justified">
+                <li>
+                    <a ng-href="#/user/list"><i class="color-success fa fa-users"></i> User</a>
+                </li>
+                <li>
+                    <a ng-href="#/administration/treatments"><i class="color-warning fa fa-hand-o-up"></i> Treatments</a>
+                </li>
+                <li>
+                    <a ng-href="#/administration/bonds"><i class="color-danger fa fa-ticket"></i> Bonds</a>
+                </li>
+                <li>
+                    <a ng-href="#/administration/rooms"><i class="color-info fa fa-table"></i> Rooms</a>
+                </li>
+                <li class="open">
+                    <a ng-href="#/administration/pathologies"><i class="color-gray fa fa-frown-o"></i> Pathologies</a>
+                </li>
+                <li>
+                    <a ng-href="#/administration/referers"><i class="color-info-alt fa fa-refresh"></i> Referers</a>
+                </li>
+                <li>
+                    <a ng-href="#/administration/clinic"><i class="color-primary fa fa-medkit"></i> Clinic data</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="panel panel-default table-dynamic" ng-controller="PathologiesCtrl">
+        <div class="panel-heading">
+            <strong><span class="fa fa-medkit"></span> Pathologies</strong>
+        </div>
+        <div class="panel-body">
+            <div class="row text-small">
+                <div class="col-sm-offset-8 col-sm-4">
+                    <form class="input-group form-search" name="form" role="search" ng-submit="search()">
+                        <span class="input-group-addon icon"><i class="fa fa-search"></i></span>
+                        <input class="input-sm form-control" ng-model="q" placeholder="Search" type="text"><span class="input-group-btn"><button class="btn btn-sm btn-default" ng-click="search()" type="button">Go!</button></span></input>
+                    </form>
+                </div>
+            </div>
+            <div class="divider">
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped ">
+                    <thead>
+                        <tr>
+                            <th>
+                                <div class="th" ng-class="{'sort-active': sort === 'name', 'sort-asc': order === 'asc', 'sort-desc': order === 'desc'}" ng-click="sortBy('name')">
+                                    Name
+                                    <span class="sort-action pull-right"><i class="fa fa-lg fa-caret-down"></i><i class="fa fa-lg fa-caret-up"></i></span>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th text-center">
+                                    Action
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="pathologie in results.data">
+                            <td ng-bind="pathologie.name">
+                            </td>
+                            <td class="text-center">
+                                <a class="btn-icon btn-icon-sm bg-info" href="javascript:;" ng-click="open(pathologie.id)"><i class="fa fa-pencil"></i></a>
+                                <a class="btn-icon btn-icon-sm bg-danger" href="javascript:;" ng-click="delete(pathologie.id)"><i class="fa fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <footer class="table-footer">
+                <div class="row">
+                    <div class="col-md-6 page-num-info">
+                        <p class="m-t inline">
+                            {{ results.from }}-{{ results.to }} of {{ results.total }} items
+                            <select ng-change="changeLimit(results.per_page)" ng-model="results.per_page" ng-options="obj for obj in perpage">
+                            </select>
+                            per page
+                        </p>
+                    </div>
+                    <div class="col-md-6 text-right pagination-container">
+                        <pagination boundary-links="true" class="pagination-sm" items-per-page="results.per_page" ng-change="goTo(results.current_page)" ng-model="results.current_page" rotate="false" total-items="results.total">
+                        </pagination>
+                    </div>
+                </div>
+                <div class="divider">
+                </div>
+                <p class="text-right">
+                    <button class="btn btn-w-md btn-gap-v btn-success" ng-click="open()" type="button"> New pathologie</button>
+                </p>
+            </footer>
+        </div>
+    </div>
+</div>

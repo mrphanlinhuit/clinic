@@ -1,0 +1,79 @@
+<div class="page page-dashboard">
+    <div class="panel">
+        <div class="panel-body" ng-controller="NewsCtrl">
+            <div class="row">
+                <div class="col-sm-8" >
+                    <h2><i class="fa fa-newspaper-o"></i> News</h2>
+                    <div class="newslist">
+                        <table class="table table-hover" >
+                            <tr class="mail-unread" ng-click="read(news)" ng-repeat="news in results.data | limitTo: 15 track by $index">
+                                <td>
+                                    <i class="fa fa-star color-warning"></i>
+                                </td>
+                                <td ng-bind="news.title | words: 20">
+                                </td>
+                                <td ng-bind="news.description | plaintext | words: 20">
+                                </td>
+                                <td ng-bind="news.created_at | date:'medium'">
+                                </td>
+                            </tr>
+                        </table>
+                    </div>                    
+                </div>
+                <div class="col-sm-4">
+                    <div class="thumbnail">
+                        <img src="images/lastnews.jpg" ng-hide="results.data[0].image_url" alt="latestnews"/>
+                        <img src="{{ results.data[0].image_url }}" ng-show="results.data[0].image_url" alt="latestnews"/>
+                        <h4 class="lastnews"><i class="fa fa-plus-square-o"></i> Latest News</h4>
+                        <div class="caption">
+                            <h3>
+                            {{ results.data[0].title | words: 20 }}
+                            </h3>
+                            <p>
+                            {{ results.data[0].description | plaintext | words: 20 }}
+                            </p>
+                            <a class="btn btn-primary" href="javascript:;" ng-click="read(results.data[0])" role="button">Read →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel">
+        <div class="row">
+            <div class="col-md-12 phonedate-list">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>
+                                Date
+                            </th>
+                            <th>
+                                Room
+                            </th>
+                            <th>
+                                Patient Name
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="session in sessions">
+                            <td ng-bind="session.scheduled_at | mydate">
+                            </td>
+                            <td ng-bind="session.room">
+                            </td>
+                            <td ng-bind="session.patient">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- <section class="panel">
+        <div class="panel-body">
+            <a class="btn btn-info btn-metro" href="javascript:;" ng-click="new()"><i class="fa fa-phone"></i><span>Phone Date</span></a>
+            <a class="btn btn-warning btn-metro" ng-href="#/calendar"><i class="fa fa-calendar"></i><span>Calendar</span></a>
+        </div>
+    </section> -->
+</div>

@@ -1,0 +1,120 @@
+<div class="page" ng-controller="MessagesCtrl">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <strong><span class="fa fa-th"></span> Messages</strong>
+        </div>
+        <div class="ui-tab-container">
+            <tabset class="ui-tab">
+                <tab heading="Inbox">
+                    <section class="panel panel-default mail-container">
+                        <div class="mail-options">
+                            <div class="row">
+                                <div class="col-md-6 page-num-info">
+                                    <p class="m-t inline">
+                                        {{ messages.from }}-{{ messages.to }} of {{ messages.total }} items
+                                        <select ng-change="changeLimit(messages.per_page)" ng-model="messages.per_page" ng-options="obj for obj in perpage">
+                                        </select>
+                                        per page
+                                    </p>
+                                </div>
+                                <div class="col-md-6 text-right pagination-container">
+                                    <pagination boundary-links="true" class="pagination-sm" items-per-page="messages.per_page" ng-change="goTo(messages.current_page)" ng-model="messages.current_page" rotate="false" total-items="messages.total">
+                                    </pagination>
+                                </div>
+                            </div>
+                        </div>
+                        <table class="table table-hover">
+                            <tr ng-class="{'mail-unread': !item.read_at}" ng-repeat="item in messages.data track by $index">
+                                <td ng-click="open(item.id)">
+                                    {{item.name}}
+                                    <i class="fa fa-circle color-info"></i>
+                                </td>
+                                <td ng-click="open(item.id)">
+                                    {{item.topic}}
+                                </td>
+                                <td ng-click="open(item.id)">
+                                    <i class="fa fa-paperclip" ng-show="item.attachment"></i>
+                                </td>
+                                <td ng-click="open(item.id)">
+                                    {{item.created_at}}
+                                </td>
+                                <td>
+                                    <a class="btn-icon btn-icon-sm bg-danger" href="javascript:;" ng-click="deleteInbox(item.id)"><i class="fa fa-trash"></i></a>
+                                </td>
+                            </tr>
+                        </table>
+                    </section>
+                </tab>
+                <tab heading="Sent">
+                    <section class="panel panel-default mail-container">
+                        <div class="mail-options">
+                             <div class="row">
+                                <div class="col-md-6 page-num-info">
+                                    <p class="m-t inline">
+                                        {{ sents.from }}-{{ sents.to }} of {{ sents.total }} items
+                                        <select ng-change="changeLimit(sents.per_page)" ng-model="sents.per_page" ng-options="obj for obj in perpage">
+                                        </select>
+                                        per page
+                                    </p>
+                                </div>
+                                <div class="col-md-6 text-right pagination-container">
+                                    <pagination boundary-links="true" class="pagination-sm" items-per-page="sents.per_page" ng-change="goTo(sents.current_page)" ng-model="sents.current_page" rotate="false" total-items="sents.total">
+                                    </pagination>
+                                </div>
+                            </div>
+                        </div>
+                        <table class="table table-hover">
+                            <tr ng-class="{'mail-unread': !item.read_at}" ng-repeat="item in sents.data track by $index">
+                                <td ng-click="open(item.id)">
+                                    To: {{item.name}}
+                                    <i class="fa fa-circle color-info"></i>
+                                </td>
+                                <td ng-click="open(item.id)">
+                                    {{item.topic}}
+                                </td>
+                                <td ng-click="open(item.id)">
+                                    <i class="fa fa-paperclip" ng-show="item.attachment"></i>
+                                </td>
+                                <td ng-click="open(item.id)">
+                                    {{item.created_at}}
+                                </td>
+                                <td>
+                                    <!-- <i class="fa fa-star"></i> -->
+                                    <a class="btn-icon btn-icon-sm bg-danger" href="javascript:;" ng-click="deleteSent(item.id)"><i class="fa fa-trash"></i></a>
+                                </td>
+                            </tr>
+                        </table>
+                    </section>
+                </tab>
+                <tab heading="Compose Message">
+                    <div ng-controller="ComposeMessageCtrl">
+                        <form class="form-horizontal" name="form" novalidate role="form">
+                            <div class="form-group" ng-class="{'has-error': form.$dirty && form.receiver.$invalid}">
+                                <label class="col-xs-2" for="receiver">To:</label>
+                                <div class="col-xs-10">
+                                    <input class="form-control" name="receiver" ng-model="receiver" placeholder="Name" required type="text" typeahead="obj as obj.fullname for obj in getUsers($viewValue)" typeahead-loading="loadingType"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-2" for="topic">Subject:</label>
+                                <div class="col-xs-10">
+                                    <input class="form-control" id="topic" ng-model="message.topic" type="text"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <textarea class="form-control" id="body" name="body" ng-model="message.body" placeholder="" rows="10">
+                                    </textarea>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="mail-actions">
+                            <button class="btn btn-sm btn-primary" ng-click="send()" ng-disabled="form.$invalid" type="submit">Send</button>
+                            <button class="btn btn-sm btn-default" ng-click="discard()" type="reset"> Discard</button>
+                        </div>
+                    </div>
+                </tab>
+            </tabset>
+        </div>
+    </div>
+</div>

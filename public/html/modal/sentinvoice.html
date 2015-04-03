@@ -1,0 +1,43 @@
+<div class="modal-header">
+    <button aria-hidden="true" class="close" data-dismiss="modal" ng-click="dismiss()" type="button">×</button>
+    <h4 class="modal-title">
+        Send invoice
+    </h4>
+</div>
+<div class="modal-body">
+    <form class="form-horizontal" name="form" ng-submit="submit()" novalidate role="form">
+        <div ng-show="!bond">
+            Please choose a bond for invoice
+        </div>
+        <div ng-show="bond">
+            <div class="form-group" ng-class='{"has-error": form.$dirty && form.name.$invalid}'>
+                <label class="col-sm-3 control-label" for="name">Name</label>
+                <div class="col-sm-9">
+                    <input class="form-control input-sm" id="name" name="name" ng-model="invoice.name" placeholder="Name" required type="text"/>
+                </div>
+            </div>
+            <div class="form-group" ng-class='{"has-error": form.$dirty && form.address.$invalid}'>
+                <label class="col-sm-3 control-label" for="address">Address</label>
+                <div class="col-sm-9">
+                    <input class="form-control input-sm" id="address" name="address" ng-model="invoice.address" placeholder="Address" required type="text"/>
+                </div>
+            </div>
+            <div class="form-group" ng-class='{"has-error": form.$dirty && form.fiscalcode.$invalid}'>
+                <label class="col-sm-3 control-label" for="fiscalcode">Fiscal code</label>
+                <div class="col-sm-9">
+                    <input class="form-control input-sm" id="fiscalcode" name="fiscalcode" ng-model="invoice.fiscalcode" placeholder="Fiscal code" required type="text"/>
+                </div>
+            </div>
+            <div class="form-group" ng-class='{"has-error": form.$dirty && form.amount.$invalid}'>
+                <label class="col-sm-3 control-label" for="amount">Amount</label>
+                <div class="col-sm-9">
+                    <input class="form-control input-sm" id="amount" name="amount" ng-model="invoice.amount" placeholder="Amount" required type="text"/>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-default" ng-click="dismiss()">Dismiss</button>
+    <button class="btn btn-primary" ng-click="submit()" ng-disabled="form.$invalid" type="submit">Send invoice</button>
+</div>

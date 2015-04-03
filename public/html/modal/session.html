@@ -1,0 +1,37 @@
+<div class="modal-header">
+    <button aria-hidden="true" class="close" data-dismiss="modal" ng-click="dismiss()" type="button">×</button>
+    <h4 class="modal-title">
+        New session
+    </h4>
+</div>
+<div class="modal-body">
+    <form class="form-horizontal" name="form" ng-submit="submit()" novalidate role="form">
+        <div class="form-group" ng-class="{'has-error': form.$dirty && form.room.$invalid}">
+            <label class="col-sm-2 control-label" for="room">Room</label>
+            <div class="col-sm-10">
+                <select class="form-control" id="room" name="room" ng-model="session.room" ng-options="obj as obj.name for obj in rooms" required>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="notes">Notes</label>
+            <div class="col-sm-10">
+                <textarea class="form-control" id="notes" name="notes" ng-model="session.notes" rows="4">
+                </textarea>
+            </div>
+        </div>
+        <div class="form-group" ng-class="{'has-error': form.$dirty && form.scheduled_at.$invalid}">
+            <label class="col-sm-2 control-label" for="scheduled_at">Schedule</label>
+            <div class="col-sm-10">
+                <div class="input-group ui-datepicker" ng-click="open($event)">
+                    <input class="form-control" close-text="Close" datepicker-options="dateOptions" datepicker-popup="dd/MM/yyyy" is-open="opened" min-date="mindate" name="scheduled_at" ng-model="session.scheduled_at" placeholder="Schedule" required type="text"/>
+                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-default" ng-click="dismiss()">Dismiss</button>
+    <button class="btn btn-primary" ng-click="submit()" ng-disabled="form.$invalid" type="submit">Save</button>
+</div>

@@ -1,0 +1,75 @@
+<div class="modal-header">
+    <button aria-hidden="true" class="close" data-dismiss="modal" ng-click="dismiss()" type="button">×</button>
+    <h4 class="modal-title">
+        Add session to schedule
+    </h4>
+</div>
+<div class="modal-body">
+    <form class="form-horizontal" name="form" ng-submit="submit()" novalidate role="form">
+        <div class="form-group" ng-class="{'has-error': form.$dirty && form.patient.$invalid}">
+            <label class="col-sm-3" for="patient">Patient</label>
+            <div class="col-sm-9">
+                <input class="form-control" name="patient" ng-model="session.patient" placeholder="Patient Name" required type="text" typeahead="obj as obj.fullname for obj in getPatient($viewValue)" typeahead-loading="loadingPartient"/>
+                <span class="icon fa fa-refresh fa-spin" ng-show="loadingPartient"></span>
+            </div>
+        </div>
+        <div class="form-group" ng-hide="session.patient.id">
+            <label class="col-sm-3" for="phone">Phone</label>
+            <div class="col-sm-9">
+                <input class="form-control" name="phone" ng-model="session.phone" placeholder="Phone" type="text"/>
+            </div>
+        </div>
+        <div class="form-group" ng-class="{'has-error': form.$dirty && form.diagnostic.$invalid}" ng-hide="session.patient.id">
+            <label class="col-sm-3" for="diagnostic">Diagnostic</label>
+            <div class="col-sm-9">
+                <input class="form-control" name="diagnostic" ng-model="session.diagnostic" placeholder="Diagnostic" required type="text"/>
+            </div>
+        </div>
+        <div class="form-group" ng-class="{'has-error': form.$dirty && form.diagnostic.$invalid}" ng-show="session.patient.id">
+            <label class="col-sm-3" for="diagnostic">Diagnostic</label>
+            <div class="col-sm-9">
+                <input class="form-control" name="diagnostic" ng-model="session.diagnostic" placeholder="Diagnostic" required type="text" typeahead="obj as obj.name for obj in diagnostics"/>
+            </div>
+        </div>
+        <div class="form-group" ng-class="{'has-error': form.$dirty && form.treatment.$invalid}">
+            <label class="col-sm-3" for="treatment">Treatment</label>
+            <div class="col-sm-9" ng-hide="session.diagnostic.id">
+                <select class="form-control" id="treatment" name="treatment" ng-change="loadEmployees(session.treatment)" ng-model="session.treatment" ng-options="obj as obj.name for obj in treatments | filter:'(doctor)'" required>
+                    <option value=""></option>
+                </select>
+            </div>
+            <div class="col-sm-9" ng-show="session.diagnostic.id">
+                <select class="form-control" id="treatment" name="treatment" ng-change="loadEmployees(session.treatment)" ng-model="session.treatment" ng-options="obj as obj.name for obj in treatments" required>
+                    <option value=""></option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group" ng-class="{'has-error': form.$dirty && form.employee.$invalid}">
+            <label class="col-sm-3" for="employee">Employee</label>
+            <div class="col-sm-9">
+                <select class="form-control" id="employee" name="employee" ng-model="session.employee" ng-options="obj as (obj.first_name + ' ' + obj.last_name) for obj in employees" required>
+                    <option value=""></option>
+                </select>
+                <span class="icon fa fa-refresh fa-spin" ng-show="loadingEmployees"></span>
+            </div>
+        </div>
+        <div class="form-group" ng-class="{'has-error': form.$dirty && form.room.$invalid}">
+            <label class="col-sm-3" for="room">Room</label>
+            <div class="col-sm-9">
+                <select class="form-control" id="room" name="room" ng-model="session.room" ng-options="obj as obj.name for obj in rooms" required>
+                    <option value=""></option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group" ng-class="{'has-error': form.$dirty && form.scheduled_at.$invalid}">
+            <label class="col-sm-3" for="">Date</label>
+            <div class="col-sm-9">
+                <input class="form-control" close-text="Close" min="mindate" name="scheduled_at" ng-model="session.scheduled_at" placeholder="Schedule" required type="datetime-local"/>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-default" ng-click="dismiss()">Dismiss</button>
+    <button class="btn btn-primary" ng-disabled="form.$invalid" ng-click="submit()" type="submit">Save</button>
+</div>

@@ -1,0 +1,26 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="928" measuredH="728" mockupW="832" mockupH="697">
+  <controls>
+    <control controlID="2" controlTypeID="com.balsamiq.mockups::TextInput" x="395" y="336" w="93" h="-1" measuredW="67" measuredH="27" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Lisa%20Doe</text>
+      </controlProperties>
+    </control>
+    <control controlID="5" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="96" y="31" w="832" h="697" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Login%0Ahttp%3A//mydomain.com/</text>
+      </controlProperties>
+    </control>
+    <control controlID="6" controlTypeID="com.balsamiq.mockups::Icon" x="488" y="325" w="-1" h="-1" measuredW="48" measuredH="48" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>ContactIcon%7Clarge</icon>
+      </controlProperties>
+    </control>
+    <control controlID="7" controlTypeID="com.balsamiq.mockups::PointyButton" x="536" y="336" w="88" h="-1" measuredW="75" measuredH="27" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>board%26bm%3Bboard.bmml%26bm%3Bboard.bmml%26bm%3Bboard.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22440%2C305%2C528%2C332%22%20href%3D%22board.bmml%22%20alt%3D%22board%22%20id%3D%227%22/%3E</map>
+        <text>Password</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

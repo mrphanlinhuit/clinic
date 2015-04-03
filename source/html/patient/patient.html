@@ -1,0 +1,271 @@
+<div class="page page-general page-profile" ng-controller="UserCtrl">
+    <div class="panel panel-default ng-hide" ng-show="!user.register">
+        <div class="panel-body">
+            <h4 class="text-center">
+                {{ user.id ? user.meta.first_name + " " + user.meta.last_name : "New patient" }}
+            </h4>
+        </div>
+    </div>
+    <div class="row ng-hide" ng-show="user.register">
+        <div class="col-md-12">
+            <ul class="nav nav-boxed nav-justified">
+                <li class="open">
+                    <a ng-href="#/patient/new"><i class="color-success fa fa-user"></i> New Patient</a>
+                </li>
+                <li>
+                    <a ng-href="#/patient/list"><i class="color-warning fa fa-users"></i> List Patients</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row ng-hide" ng-show="!user.register">
+        <div class="col-md-12">
+            <ul class="nav nav-boxed nav-justified">
+                <li class="open">
+                    <a ng-href="{{ (user.id) ? '#/patient/' + user.id : '#/patient/new' }}"><i class="color-success fa fa-user"></i>Personal data</a>
+                </li>
+                <li>
+                    <a ng-href="{{ (user.id) ? '#/patient/diagnostics/' + user.id : '' }}"><i class="color-warning fa fa-search"></i>Diagnostics</a>
+                </li>
+                <li>
+                    <a ng-href="{{ (user.id) ? '#/patient/appointments/' + user.id : '' }}"><i class="color-danger fa fa-building"></i>Appointments</a>
+                </li>
+                <li>
+                    <a ng-href="{{ (user.id) ? '#/patient/bonds/' + user.id : '' }}"><i class="color-info fa fa-ticket"></i>Bonds</a>
+                </li>
+                <li>
+                    <a ng-href="{{ (user.id) ? '#/patient/invoices/' + user.id : '' }}"><i class="color-gray fa fa-file-text-o"></i>Invoices</a>
+                </li>
+                <li>
+                    <a ng-href="{{ (user.id) ? '#/patient/timeline/' + user.id : '' }}"><i class="color-info-alt fa fa-clock-o"></i>Timeline</a>
+                </li>
+                <li>
+                    <a ng-href="{{ (user.id) ? '#/patient/cash/' + user.id : '' }}"><i class="color-primary fa fa-eur"></i>Cash</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <strong><span class="glyphicon glyphicon-th"></span> Patient Personal Data</strong>
+        </div>
+        <div class="panel-body">
+            <form class="form-horizontal" name="form" ng-submit="save()" novalidate role="form">
+                <input ng-init="user.role_id = ([6])" type="hidden"/>
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="last_name">Surname</label>
+                            <div class="col-sm-4" ng-class="{'has-error': form.$dirty && form.last_name.$invalid}">
+                                <input class="form-control input-sm" id="last_name" name="last_name" ng-model="user.meta.last_name" placeholder="Surname" required type="text" maxlength="32"/>
+                            </div>
+                            <label class="col-sm-2 control-label" for="first_name">Name</label>
+                            <div class="col-sm-4" ng-class="{'has-error': form.$dirty && form.first_name.$invalid}">
+                                <input class="form-control input-sm" id="first_name" name="first_name" ng-model="user.meta.first_name" placeholder="Name" required type="text" maxlength="32"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="national_id">National ID</label>
+                            <div class="col-sm-4">
+                                <input class="form-control" id="national_id" name="national_id" ng-model="user.meta.national_id" placeholder="National ID" type="text"/>
+                            </div>
+                            <label class="col-sm-2 control-label" for="job">Job</label>
+                            <div class="col-sm-4">
+                                <input class="form-control" id="job" name="job" ng-model="user.meta.job" placeholder="Job" type="text"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="address1">Address</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" id="address1" name="address1" ng-model="user.meta.address1" placeholder="Address" type="text"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="postal">Zip Code</label>
+                            <div class="col-sm-4">
+                                <input class="form-control" id="postal" name="postal" ng-change="onZipcode(user.meta.postal)" ng-model="user.meta.postal" placeholder="Zip Code" type="text"/>
+                            </div>
+                            <label class="col-sm-2 control-label" for="province">Province</label>
+                            <div class="col-sm-4">
+                                <input class="form-control" id="province" name="province" ng-model="user.meta.province" placeholder="Province" type="text"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="city">Locality</label>
+                            <div class="col-sm-4">
+                                <select class="form-control" id="city" name="city" ng-model="user.meta.city" ng-options="obj.name as obj.name for obj in postals" type="text">
+                                </select>
+                            </div>
+                            <label class="col-sm-2 control-label" for="country">Country</label>
+                            <div class="col-sm-4">
+                                <select class="form-control" id="country" name="country" ng-model="user.meta.country" ng-options="obj.key as obj.name for obj in countries" type="text">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="phone">Phone</label>
+                            <div class="col-sm-4">
+                                <input class="form-control" id="phone" name="phone" ng-model="user.meta.phone" placeholder="Phone" type="text"/>
+                            </div>
+                            <label class="col-sm-2 control-label" for="mobile">Mobile</label>
+                            <div class="col-sm-4">
+                                <input class="form-control" id="mobile" name="mobile" ng-model="user.meta.mobile" placeholder="Mobile" type="text"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="email">Email</label>
+                            <div class="col-sm-4" ng-class="{'has-error': form.$dirty && form.email.$invalid}">
+                                <input class="form-control" id="email" name="email" ng-model="user.credential.email" placeholder="Email" type="email"/>
+                            </div>
+                            <label class="col-sm-2 control-label" for="alias">Alias</label>
+                            <div class="col-sm-4">
+                                <input class="form-control" id="alias" name="alias" ng-model="user.meta.alias" placeholder="Alias" type="text"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="birthday">Birthday</label>
+                            <div class="col-sm-4">
+                                <div class="input-group ui-datepicker" ng-click="open($event)">
+                                    <input class="form-control" close-text="Close" datepicker-options="dateOptions" datepicker-popup="MM/dd/yyyy" is-open="opened" ng-model="user.meta.birthday" type="text"/>
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                </div>
+                            </div>
+                            <label class="col-sm-2 control-label" for="age">Age</label>
+                            <div class="col-sm-4">
+                                <input class="form-control input-sm" disabled="disabled" ng-value="user.meta.birthday|date:'yyyy'|age" type="text"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label" for="gender">Gender</label>
+                                    <div class="col-sm-8">
+                                        <select class="form-control" id="gender" name="gender" ng-model="user.meta.gender" ng-options="obj.key as obj.label for obj in genders" type="text">
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label" for="referer">Referer</label>
+                                    <div class="col-sm-8">
+                                        <select class="form-control" id="referer" name="referer" ng-model="user.meta.referer" ng-options="obj.id as obj.name for obj in referers">
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label" for="">Tags</label>
+                                    <div class="col-sm-8">
+                                        <tags-input class="ui-tags-input" display-property="name" ng-model="user.tags">
+                                            <auto-complete source="loadTags($viewValue)"></auto-complete>
+                                        </tags-input>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="avatar" ng-file-drop ng-file-over ng-show="uploader.isHTML5">
+                            <a class="remove btn-icon btn-icon-sm btn-danger" href="javascript:;" ng-click="removeAvatar()"><i class="fa fa-times"></i></a>
+                            <img class="img-on-load img-responsive" ng-click="avatarModal()" ng-src="{{user.meta.profile_img_url | getAvatar}}"/>
+                            <div class="text-center">
+                                Drag and drop files here
+                                <div ng-show="showprogress">
+                                    <progressbar class="progressbar-sm progress-striped active" ng-show="progress > 0" value="progress">
+                                        <span>{{progress}}%</span>
+                                    </progressbar>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="col-sm-1 control-label" for="note">Note</label>
+                            <div class="col-sm-11">
+                                <textarea class="form-control" id="note" name="note" ng-model="user.patient.note" placeholder="Note" rows="4">
+                                </textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-right">
+                    <button class="btn" ng-click="dismiss()" type="button">Revert</button>
+                    <button class="btn btn-success" type="submit">Save changes</button>
+                </p>
+                <p ng-hide="user.register">
+                    Created {{user.created_at | mydatetime}} by {{user.created_by_name}}. Last modified {{user.updated_at | mydatetime}} by {{user.updated_by_name}}.
+                </p>
+            </form>
+        </div>
+    </div>
+    <div class="panel panel-default" ng-hide="user.register">
+        <div class="panel-heading">
+            <strong><span class="fa fa-paperclip"></span> Attachments</strong>
+        </div>
+        <div class="panel-body" ng-controller="AttachmentCtrl">
+            <table class="table table-bordered table-striped table-responsive">
+                <thead>
+                    <tr>
+                        <th>
+                            <div class="th" ng-class="{'sort-active': sort === 'original_filename', 'sort-asc': order === 'asc', 'sort-desc': order === 'desc'}" ng-click="sortBy('original_filename')">
+                                Filename
+                                <span class="sort-action pull-right"><i class="fa fa-lg fa-caret-down"></i><i class="fa fa-lg fa-caret-up"></i></span>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="th" ng-class="{'sort-active': sort === 'description', 'sort-asc': order === 'asc', 'sort-desc': order === 'desc'}" ng-click="sortBy('description')">
+                                Description
+                                <span class="sort-action pull-right"><i class="fa fa-lg fa-caret-down"></i><i class="fa fa-lg fa-caret-up"></i></span>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="th" ng-class="{'sort-active': sort === 'created_at', 'sort-asc': order === 'asc', 'sort-desc': order === 'desc'}" ng-click="sortBy('created_at')">
+                                Date added
+                                <span class="sort-action pull-right"><i class="fa fa-lg fa-caret-down"></i><i class="fa fa-lg fa-caret-up"></i></span>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="th">
+                                Action
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="file in results.data">
+                        <td ng-bind="file.original_filename">
+                        </td>
+                        <td ng-bind="file.description">
+                        </td>
+                        <td ng-bind="file.created_at">
+                        </td>
+                        <td class="text-center">
+                            <a class="btn-icon btn-icon-sm bg-success" ng-href="{{file.filepath}}" target="_blank"><i class="fa fa-download"></i></a>
+                            <a class="btn-icon btn-icon-sm bg-info" href="javascript:;" ng-click="edit(file.id)"><i class="fa fa-pencil"></i></a>
+                            <a class="btn-icon btn-icon-sm bg-danger" href="javascript:;" ng-click="delete(file.hash)"><i class="fa fa-trash"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="row">
+                <div class="col-sm-12" ng-show="showprogress">
+                    <progressbar class="progressbar-sm progress-striped active" value="progress">
+                        <span>{{progress}}%</span>
+                    </progressbar>
+                </div>
+                <div class="col-sm-12">
+                    <input class="form-control" id="attachments" multiple name="attachments" ng-file-select type="file" upload-button upload-button-class="btn btn-default" upload-button-text="Upload Attachments"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12" ng-file-drop>
+                    <div ng-show="uploader.isHTML5">
+                        <div class="drop-box" ng-file-over>
+                            Drag and drop files here
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,111 @@
+<div class="page page-general">
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="nav nav-boxed nav-justified">
+                <li>
+                    <a href="#/accounting/invoices"><i class="color-success fa fa-file-text-o"></i> Client Invoices</a>
+                </li>
+                <li>
+                    <a href="#/accounting/provider-invoices"><i class="color-warning fa fa-file-text"></i> Provider Invoices</a>
+                </li>
+                <li class="open">
+                    <a href="#/accounting/provider-new"><i class="color-danger fa fa-pencil-square-o"></i> New Provider</a>
+                </li>
+                <li>
+                    <a href="#/accounting/provider-list"><i class="color-info fa fa-list-ol"></i>Providers List</a>
+                </li>
+                <li>
+                    <a href="#/accounting/statistics"><i class="color-gray fa fa-bar-chart-o"></i> Statistics</a>
+                </li>
+                <li>
+                    <a href="#/accounting/download"><i class="color-info-alt fa fa-download"></i> Download</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="panel panel-default" ng-controller="ProviderCtrl">
+        <div class="panel-heading">
+            <strong><span class="fa fa-calculator"></span> Provider</strong>
+        </div>
+        <div class="panel-body">
+            <form class="form-horizontal" name="form" ng-submit="submit()" novalidate role="form">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="name">Name</label>
+                    <div class="col-sm-10" ng-class="{'has-error': form.$dirty && form.name.$invalid}">
+                        <input class="form-control" id="name" name="name" ng-model="provider.name" placeholder="Name" required type="text"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="fiscalcode">Fiscal ID</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" id="fiscalcode" name="fiscalcode" ng-model="provider.fiscalcode" placeholder="Fiscal ID" type="text"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="address">Address</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" id="address" name="address" ng-model="provider.address" placeholder="Address" type="text"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="postal">Zip Code</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" id="postal" name="postal" ng-change="onZipcode(provider.postal)" ng-model="provider.postal" placeholder="Zip Code" type="text"/>
+                    </div>
+                    <label class="col-sm-2 control-label" for="province">Province</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" id="province" name="province" ng-model="provider.province" placeholder="Province" type="text"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="city">Locality</label>
+                    <div class="col-sm-4">
+                        <select class="form-control" id="city" name="city" ng-model="provider.city" ng-options="obj.name as obj.name for obj in postals" type="text">
+                        </select>
+                    </div>
+                    <label class="col-sm-2 control-label" for="country">Country</label>
+                    <div class="col-sm-4">
+                        <select class="form-control" id="country" name="country" ng-model="provider.country" ng-options="obj.key as obj.name for obj in countries" type="text">
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="phone">Phone</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" id="phone" name="phone" ng-model="provider.phone" placeholder="Phone" type="text"/>
+                    </div>
+                    <label class="col-sm-2 control-label" for="mobile">Mobile</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" id="mobile" name="mobile" ng-model="provider.mobile" placeholder="Mobile" type="text"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="email">Email</label>
+                    <div class="col-sm-4" ng-class="{'has-error': form.$dirty && form.email.$invalid}">
+                        <input class="form-control" id="email" name="email" ng-model="provider.email" placeholder="Email" type="email"/>
+                    </div>
+                    <label class="col-sm-2 control-label" for="alias">Alias</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" id="alias" name="alias" ng-model="provider.alias" placeholder="Alias" type="text"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <label class="" for="note">Note</label>
+                    </div>
+                    <div class="col-sm-12">
+                        <textarea class="form-control" id="note" name="note" ng-model="provider.note" placeholder="Note" rows="4">
+                        </textarea>
+                    </div>
+                </div>
+                <p class="text-right">
+                    <button class="btn" ng-click="dismiss()" type="button">Revert</button>
+                    <button class="btn btn-success" ng-disabled="form.$invalid" type="submit">Save changes</button>
+                </p>
+                <p ng-show="provider.created_at">
+                    Created {{provider.created_at}} by {{provider.created_by_name}}. Last modified {{provider.updated_at}} by {{provider.updated_by_name}}.
+                </p>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,249 @@
+<div class="page page-general page-accounting-provider" ng-controller="ProviderCtrl">
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="nav nav-boxed nav-justified">
+                <li>
+                    <a href="#/accounting/invoices"><i class="color-success fa fa-file-text-o"></i> Client Invoices</a>
+                </li>
+                <li>
+                    <a href="#/accounting/provider-invoices"><i class="color-warning fa fa-file-text"></i> Provider Invoices</a>
+                </li>
+                <li class="open">
+                    <a href="#/accounting/provider-new"><i class="color-danger fa fa-pencil-square-o"></i> New Provider</a>
+                </li>
+                <li>
+                    <a href="#/accounting/provider-list"><i class="color-info fa fa-list-ol"></i>Providers List</a>
+                </li>
+                <li>
+                    <a href="#/accounting/statistics"><i class="color-gray fa fa-bar-chart-o"></i> Statistics</a>
+                </li>
+                <li>
+                    <a href="#/accounting/download"><i class="color-info-alt fa fa-download"></i> Download</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <strong><span class="fa fa-calculator"></span> Provider</strong>
+        </div>
+        <div class="panel-body">
+            <form class="form-horizontal" name="form" ng-submit="submit()" novalidate role="form">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="name">Name</label>
+                    <div class="col-sm-4" ng-class="{'has-error': form.$dirty && form.name.$invalid}">
+                        <input class="form-control" id="name" name="name" ng-model="provider.name" placeholder="Name" required type="text"/>
+                    </div>
+                    <label class="col-sm-2 control-label" for="fiscalcode">Fiscal ID</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" id="fiscalcode" name="fiscalcode" ng-model="provider.fiscalcode" placeholder="Fiscal ID" type="text"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="address">Address</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" id="address" name="address" ng-model="provider.address" placeholder="Address" type="text"/>
+                    </div>
+                    <label class="col-sm-2 control-label" for="vat_id">VAT ID</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" id="vat_id" name="vat_id" ng-model="provider.vat_id" placeholder="VAT ID" type="text"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="postal">Zip Code</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" id="postal" name="postal" ng-change="onZipcode(provider.postal)" ng-model="provider.postal" placeholder="Zip Code" type="text"/>
+                    </div>
+                    <label class="col-sm-2 control-label" for="province">Province</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" id="province" name="province" ng-model="provider.province" placeholder="Province" type="text"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="city">Locality</label>
+                    <div class="col-sm-4">
+                        <select class="form-control" id="city" name="city" ng-model="provider.city" ng-options="obj.name as obj.name for obj in postals" type="text">
+                        </select>
+                    </div>
+                    <label class="col-sm-2 control-label" for="country">Country</label>
+                    <div class="col-sm-4">
+                        <select class="form-control" id="country" name="country" ng-model="provider.country" ng-options="obj.key as obj.name for obj in countries" type="text">
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="phone">Phone</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" id="phone" name="phone" ng-model="provider.phone" placeholder="Phone" type="text"/>
+                    </div>
+                    <label class="col-sm-2 control-label" for="mobile">Mobile</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" id="mobile" name="mobile" ng-model="provider.mobile" placeholder="Mobile" type="text"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="email">Email</label>
+                    <div class="col-sm-4" ng-class="{'has-error': form.$dirty && form.email.$invalid}">
+                        <input class="form-control" id="email" name="email" ng-model="provider.email" placeholder="Email" type="email"/>
+                    </div>
+                    <label class="col-sm-2 control-label" for="alias">Alias</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" id="alias" name="alias" ng-model="provider.alias" placeholder="Alias" type="text"/>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <label class="" for="note" ng-model="provider.alias">Note</label>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <textarea class="form-control" id="note" name="note" ng-model="provider.note" placeholder="Note" rows="4">
+                        </textarea>
+                    </div>
+                </div>
+                <p class="text-right">
+                    <button class="btn" ng-click="dismiss()" type="button">Revert</button>
+                    <button class="btn btn-primary" ng-disabled="form.$invalid" type="submit">Save changes</button>
+                </p>
+                <p ng-show="provider.created_at">
+                    Created {{provider.created_at | mydate}} by {{provider.created_by_name}}. Last modified {{provider.updated_at | mydate}} by {{provider.updated_by_name}}.
+                </p>
+            </form>
+        </div>
+    </div>
+    <div class="panel panel-default table-dynamic" ng-controller="ProviderInvoicesCtrl">
+        <div class="panel-heading">
+            <strong><span class="fa fa-calculator"></span> Provider invoices</strong>
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                <div class="th" ng-class="{'sort-active': sort === 'filename', 'sort-asc': order === 'asc', 'sort-desc': order === 'desc'}" ng-click="sortBy('filename')">
+                                    Filename
+                                    <span class="sort-action pull-right"><i class="fa fa-lg fa-caret-down"></i><i class="fa fa-lg fa-caret-up"></i></span>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th" ng-class="{'sort-active': sort === 'number', 'sort-asc': order === 'asc', 'sort-desc': order === 'desc'}" ng-click="sortBy('number')">
+                                    Number
+                                    <span class="sort-action pull-right"><i class="fa fa-lg fa-caret-down"></i><i class="fa fa-lg fa-caret-up"></i></span>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th" ng-class="{'sort-active': sort === 'invoice_date', 'sort-asc': order === 'asc', 'sort-desc': order === 'desc'}" ng-click="sortBy('invoice_date')">
+                                    Invoice date
+                                    <span class="sort-action pull-right"><i class="fa fa-lg fa-caret-down"></i><i class="fa fa-lg fa-caret-up"></i></span>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th" ng-class="{'sort-active': sort === 'date_added', 'sort-asc': order === 'asc', 'sort-desc': order === 'desc'}" ng-click="sortBy('date_added')">
+                                    Date added
+                                    <span class="sort-action pull-right"><i class="fa fa-lg fa-caret-down"></i><i class="fa fa-lg fa-caret-up"></i></span>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th" ng-class="{'sort-active': sort === 'amount', 'sort-asc': order === 'asc', 'sort-desc': order === 'desc'}" ng-click="sortBy('amount')">
+                                    Amount without taxes
+                                    <span class="sort-action pull-right"><i class="fa fa-lg fa-caret-down"></i><i class="fa fa-lg fa-caret-up"></i></span>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th" ng-class="{'sort-active': sort === 'total', 'sort-asc': order === 'asc', 'sort-desc': order === 'desc'}" ng-click="sortBy('total')">
+                                    Total Amount
+                                    <span class="sort-action pull-right"><i class="fa fa-lg fa-caret-down"></i><i class="fa fa-lg fa-caret-up"></i></span>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th">
+                                    Delete
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in results.data">
+                            <td ng-bind="item.filename">
+                            </td>
+                            <td ng-bind="item.number">
+                            </td>
+                            <td ng-bind="item.date | mydate">
+                            </td>
+                            <td ng-bind="item.created_at | mydate">
+                            </td>
+                            <td ng-bind="item.amount">
+                            </td>
+                            <td ng-bind="item.total">
+                            </td>
+                            <td class="text-center">
+                                 <a class="btn-icon btn-icon-sm bg-info" ng-href="{{item.filepath}}" target="_blank"><i class="fa fa-eye"></i></a>
+                                <a class="btn-icon btn-icon-sm bg-danger" href="javascript:;" ng-click="delete(item.id)"><i class="fa fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <footer class="table-footer">
+                <div class="row">
+                    <div class="col-md-6 page-num-info">
+                        <p class="m-t">
+                            <span class="inline">{{ results.from }}-{{ results.to }} of {{ results.total }} items <select ng-change="changeLimit(results.per_page)" ng-model="results.per_page" ng-options="obj for obj in perpage"></select> per page</span>
+                        </p>
+                    </div>
+                    <div class="col-md-6 text-right pagination-container">
+                        <pagination boundary-links="true" class="pagination-sm" ng-change="goTo(page)" ng-model="results.current_page" rotate="false" total-items="results.total">
+                        </pagination>
+                    </div>
+                </div>
+                <div class="row">
+                    <form class="form-horizontal" name="form" ng-submit="create()" novalidate role="form">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="number">Number</label>
+                                <div class="col-sm-4" ng-class="{'has-error': form.$dirty && form.number.$invalid}">
+                                    <input class="form-control" id="number" name="number" ng-model="invoice.number" placeholder="Number" required type="text"/>
+                                </div>
+                                <label class="col-sm-2 control-label" for="date">Date</label>
+                                <div class="col-sm-4" ng-class="{'has-error': form.$dirty && form.date.$invalid}">
+                                    <div class="input-group ui-datepicker" ng-click="open($event)">
+                                        <input class="form-control" close-text="Close" datepicker-options="dateOptions" datepicker-popup="MM/dd/yyyy" is-open="opened" ng-model="invoice.date" required type="text"/>
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="amount">W.T.</label>
+                                <div class="col-sm-4" ng-class="{'has-error': form.$dirty && form.amount.$invalid}">
+                                    <input class="form-control" id="amount" name="amount" ng-model="invoice.amount" placeholder="Amount without taxes" required type="text"/>
+                                </div>
+                                <label class="col-sm-2 control-label" for="total">Total</label>
+                                <div class="col-sm-4" ng-class="{'has-error': form.$dirty && form.total.$invalid}">
+                                    <input class="form-control" id="total" name="total" ng-model="invoice.total" placeholder="Total" required type="text"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-4 col-sm-offset-8">
+                                    <button class="btn btn-primary" ng-disabled="form.$invalid || !attachment" type="submit">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6" ng-file-drop>
+                            <div class="row">
+                                <progressbar class="progressbar-sm progress-striped active" ng-show="showprogress" value="progress">
+                                    <span>{{progress}}%</span>
+                                </progressbar>
+                                <input class="form-control" id="attachments" name="attachments" ng-file-select type="file" upload-button upload-button-class="btn btn-default" upload-button-text="Upload Attachments"/>
+                                <div ng-show="uploader.isHTML5">
+                                    <div class="drop-box" ng-file-over>
+                                        Drag and drop files here
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </footer>
+        </div>
+    </div>
+</div>
